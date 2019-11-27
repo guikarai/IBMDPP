@@ -57,18 +57,31 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
 3. Protection – In this case the Passport Controller protects the data (according to the policy) and stores the protected data (TDOs) into the target DBMS. Here there is a single copy of data saved as TDOs.
 4. Protect and then enforce –In this case, the Passport Controller will be established as a proxy for accessing the protected table and will intercept the SQL requests and apply enforcement to the data before it is returned to the consumer. This is using a single copy of the data to provide multiple views.
 
-# Hands-on LAB content
-## Connecting to IBM Data Privacy Passports
+# Steps
 
-## Browsing the active policy
+* **Step 1** Policy Exploration
+    1. What is a policy?
+    2. Active policy description
+    3. Understanding the policy
 
-## Querying Source Data
+* **Step 2** Dynamic Enforcement
+    1. Connecting to a source DBMS
+    2. Querying the source DBMS
+    3. Connect to IBM DPP to query a source DBMS
+    4. Querying the source DBMS as a Data Owner (DO)
+    4. Querying the source DBMS as a Data Administrator (DA)
+    4. Querying the source DBMS as Application1 (App1)    
 
-## Creating Enforced Data in the Hybrid Cloud context
+* **Step 3** Persisted Enforcement
 
-## Creating TDO in the Hybrid Cloud context
+    1. Creating a protected table for Data Administrator (DA) from the source to a PostgreSQL on Linux on IBM Z
+    4. Querying the protected table of Data Administrator (DA)
+    2. Creating a protected table from the source to Oracle on AWS
+    4. Querying the source DBMS as a Data Owner (DO)
 
-## Querying a TDO
+    4. Querying the source DBMS as Application1 (App1)   
+
+* **Step 4** Protection, Protection the Enforcement
 
 
 
