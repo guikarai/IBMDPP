@@ -10,7 +10,15 @@ When you will complete this hands-on exploration of IBM Data Privacy Passports, 
 * How data is protected then enforced
 * How a TDO protects the data
 
-# About IBM Data Privacy Passports
+# Architecture
+This journey requires an existing Linux on IBM Z environment provided to you by the hands-on LAB team. From there you will be able to connect to several DBMS and IBM Data Privacy Passports appliance.
+![alt-text](https://github.com/guikarai/LinuxONE-ECC/blob/master/images/linuxone-ecc.png)
+
+1. User to connect to an original source of data.
+2. User to create, and to browse multiple persisted enforced data copies
+3. User to create, to browse, to use multiple protected data copies
+
+## What is IBM Data Privacy Passports?
 IBM Data Privacy Passports is a data centric audit and protection (DCAP) solution that protects and enforces appropriate use of data after it leaves the system of record, minimizing the risk of security breach, potential noncompliance and financial liability.
 
 Data Privacy Passports is a data centric security solution that enables data to play an active role in its own protection. It lets you implement field level data protection to protect that data throughout its lifecycle.
@@ -24,10 +32,20 @@ The data protection policy is enforced from a central point of authority that al
 **Enforced Data:**
 Once a Trusted Data Object reaches an authorized user, data elements are transformed from protected data into enforced data. Enforced data has been masked or redacted to reveal only data that is authorized for a given user based on policy controls determined by the central Trust Authority.
 
-## What are the components of Data Privacy Passports?
-There are 4 key components of Data Privacy Passports - Trust Authority, Passport Controller and Trusted Data Object. Let’s look at each one.
+# Included components
 
-**Policy:**
+## Featured technologies
+* [LinuxONE Crypto](https://www.ibm.com/it-infrastructure/linuxone/capabilities/secure-cloud)
+* [OpenSSL](https://www.openssl.org/)
+* [IBM LinuxONE](https://www.ibm.com/it-infrastructure/linuxone)
+* [AWS](https://aws.amazon.com/)
+* [z/OS Db2](https://www.ibm.com/analytics/db2/zos)
+* [Oracle](https://docs.oracle.com/en/database/index.html)
+
+## IBM Data Passports components
+There are 4 key components of Data Privacy Passports - Policy, Trust Authority, Passport Controller and Trusted Data Object. Let’s look at each one.
+
+**Policy:** DataPassports™ focuses on data structures and data elements as the “carriers” of Trust, which means it “embeds” the security and privacy policies of an enterprise into the data in a way that enables the data to form a “data layer” agnostic of the processes that consume it. To do that the enterprise policies regarding the usage of data must be captured in a data-centric manner. The policy is the rules book describing what data need to be protected, and how, and according which enterprise business functions and their users. The policy looks likes and xml files made of sections.
 
 **Trusted Data Object:** A Trusted Data Object contains data that is bundled and portable between multiple environments. Data consumers can freely use data from various sources while access and control is enforced through centrally controlled policy in real time. A TDO is the encrypted data element plus metadata. The data element is encrypted using a specific key (or set of keys) and all required instructions on how to process the TDO are included in the metadata.
 
@@ -39,6 +57,7 @@ There are 4 key components of Data Privacy Passports - Trust Authority, Passport
 3. Protection – In this case the Passport Controller protects the data (according to the policy) and stores the protected data (TDOs) into the target DBMS. Here there is a single copy of data saved as TDOs.
 4. Protect and then enforce –In this case, the Passport Controller will be established as a proxy for accessing the protected table and will intercept the SQL requests and apply enforcement to the data before it is returned to the consumer. This is using a single copy of the data to provide multiple views.
 
+# Hands-on LAB content
 ## Connecting to IBM Data Privacy Passports
 
 ## Browsing the active policy
