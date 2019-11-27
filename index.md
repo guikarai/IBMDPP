@@ -42,10 +42,10 @@ Once a Trusted Data Object reaches an authorized user, data elements are transfo
 * [z/OS Db2](https://www.ibm.com/analytics/db2/zos)
 * [Oracle](https://docs.oracle.com/en/database/index.html)
 
-## IBM Data Passports components
+## IBM Data Passports components and roles
 There are 4 key components of Data Privacy Passports - Policy, Trust Authority, Passport Controller and Trusted Data Object. Let’s look at each one.
 
-**Policy:** DataPassports™ focuses on data structures and data elements as the “carriers” of Trust, which means it “embeds” the security and privacy policies of an enterprise into the data in a way that enables the data to form a “data layer” agnostic of the processes that consume it. To do that the enterprise policies regarding the usage of data must be captured in a data-centric manner. The policy is the rules book describing what data need to be protected, and how, and according which enterprise business functions and their users. The policy looks likes and xml files made of sections.
+**Policy:** IBM Data privacy Passports focuses on data structures and data elements as the “carriers” of Trust, which means it “embeds” the security and privacy policies of an enterprise into the data in a way that enables the data to form a “data layer” agnostic of the processes that consume it. To do that the enterprise policies regarding the usage of data must be captured in a data-centric manner. The policy is the rules book describing what data need to be protected, and how, and according which enterprise business functions and their users. The policy looks likes and xml files made of sections.
 
 **Trusted Data Object:** A Trusted Data Object contains data that is bundled and portable between multiple environments. Data consumers can freely use data from various sources while access and control is enforced through centrally controlled policy in real time. A TDO is the encrypted data element plus metadata. The data element is encrypted using a specific key (or set of keys) and all required instructions on how to process the TDO are included in the metadata.
 
