@@ -4,12 +4,11 @@ Seen and used in IBM Systems Technical University
 * Upcoming May 25-29	TechU in Amsterdam, Netherlands
 
 # About this Hands-on LAB
-When you will complete this hands-on exploration of the ECC on LinuxONE, you will understand how to:
-* Preparing your Linux Environment to use hardware crypto
-* Enabling OpenSSL to use the Hardware
-* Monitor RSA public key activity performance
-* Monitor ECC public key activity performance
-* Compare RSA and ECC performance
+When you will complete this hands-on exploration of IBM Data Privacy Passports, you will understand:
+* How is organized an IBM Data Privacy Passports Policy
+* How data is enforced “on the fly”
+* How data is protected then enforced
+* How a TDO protects the data
 
 # About IBM Data Privacy Passports
 IBM Data Privacy Passports is a data centric audit and protection (DCAP) solution that protects and enforces appropriate use of data after it leaves the system of record, minimizing the risk of security breach, potential noncompliance and financial liability.
