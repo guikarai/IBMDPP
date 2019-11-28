@@ -76,7 +76,7 @@ You can find below how a JDBC application use to connect to a DBMS. I took as ex
 1. User connect to an URL pointing to the target DBMS. For such connection, it is mandatory to provide valid credentials, the name of the Database, driver name, ...
 2. Once connected, user can SQL query the DBMS according to the need.
 3. DBMS sent back SQL query output to the user.
-![alt-text](https://github.com/guikarai/IBMDPP/blob/master/IBM-DPP-Landscape.png?raw=true)
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/statuquo.png)
 
 **Using Apache Beeline to start a JDBC connection**
 
