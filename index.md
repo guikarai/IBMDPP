@@ -14,9 +14,9 @@ When you will complete this hands-on exploration of IBM Data Privacy Passports, 
 This journey requires an existing Linux on IBM Z environment provided to you by the hands-on LAB team. From there you will be able to connect to several DBMS and IBM Data Privacy Passports appliance.
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/IBM-DPP-Landscape.png?raw=true)
 
-1. User to connect to an original source of data.
-2. User to create, and to browse multiple persisted enforced data copies
-3. User to create, to browse, to use multiple protected data copies
+1. User to experience direct connection to a data source.
+2. User to experience Dynamic Enforcement of the data thanks to IBM Data Privacy Passports.
+3. User to experience Data Protection with Trusted Data Object thanks to IBM Data Privacy Passports.
 
 ## What is IBM Data Privacy Passports?
 IBM Data Privacy Passports is a data centric audit and protection (DCAP) solution that protects and enforces appropriate use of data after it leaves the system of record, minimizing the risk of security breach, potential noncompliance and financial liability.
