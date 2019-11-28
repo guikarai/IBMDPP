@@ -12,7 +12,7 @@ When you will complete this hands-on exploration of IBM Data Privacy Passports, 
 
 # Architecture
 This journey requires an existing Linux on IBM Z environment provided to you by the hands-on LAB team. From there you will be able to connect to several DBMS and IBM Data Privacy Passports appliance.
-![alt-text](https://github.com/guikarai/LinuxONE-ECC/blob/master/images/linuxone-ecc.png)
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/IBM-DPP-Landscape.png?raw=true)
 
 1. User to connect to an original source of data.
 2. User to create, and to browse multiple persisted enforced data copies
