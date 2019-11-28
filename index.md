@@ -132,7 +132,7 @@ Beeline version 1.2.1.spark2 by Apache Hive
 Closing: 0: jdbc:postgresql://10.3.58.109/userdb
 ```
 
-* **Step 3** Dynamic Enforcement
+## **Step 3** Dynamic Enforcement
 
 With IBM Data Privacy Passports, your users and applications must now connect to IBM DPP via JDBC, no more directly to the target DBMS. You can find below how a JDBC user can connect to IBM DPP.
 
