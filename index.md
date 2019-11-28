@@ -59,17 +59,45 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
 
 # Steps
 
-* **Step 0** Hands-on LAB Environment overview
+## **Step 0** Hands-on LAB Environment overview
+
 You will find on Hands-on LAB laptop a sticker with your number id.
+
 Each time in the Hands-on LAB you see <yourID>, please replace <yourID> with the number as writen on the sticker.
 
-* **Step 1** Policy Exploration
+## **Step 1** Policy Exploration
     1. What is a policy?
     2. Active policy description
     3. Understanding the policy
 
-* **Step 2** Connecting to a Source DBMS
-    1. Connecting to a source DBMS
+## **Step 2** Connecting to a Source DBMS
+**Connecting to a source DBMS**
+```
+[root@rhl76dpp scripts]# beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p myuser -d org.postgresql.Driver -e 'select * from customer limit 10';
+Connecting to jdbc:postgresql://10.3.58.109/userdb
+Connected to: PostgreSQL (version 10.9 (Ubuntu 10.9-0ubuntu0.18.04.1))
+Driver: PostgreSQL JDBC Driver (version 42.2.5)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  | age  |    sin     |            email            |        phone         |                 mailing_address                 | prov_abbr  | postal_code  |
++------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+| 1000016268       | Female  | Madeline    | Campbell   | 39   | 346108285  | carrolljoseph@hill.com      | 1-394-776-2104       | 0649 Ann Greens, Edwardton                      | AB         | R9V7G8       |
+| 1000012605       | Female  | Lynn        | Scott      | 27   | 978982456  | janet64@hotmail.com         | (749) 623-9781       | 9800 Tina Crescent, North Alexandraton          | SK         | R2A5R8       |
+| 1000012979       | Female  | Lauren      | Arroyo     | 44   | 809852991  | scottwilson@foster.info     | 1-818-222-2486       | 065 Russell Dam Apt. 235, Newtonstad            | MB         | V6T 3Y3      |
+| 1000001690       | Male    | Anthony     | Mendoza    | 65   | 210726574  | cgarcia@simpson-howard.com  | 589-767-7808         | 1803 Roberson Spur, New Krista                  | AB         | L4B1A4       |
+| 1000011265       | Female  | Kimberly    | Quinn      | 62   | 262697551  | hendersonjames@price.biz    | 670 392 0575         | 638 Crystal Track, Port Stacy                   | AB         | P7B1C7       |
+| 1000014413       | Male    | Michael     | Carter     | 57   | 467383604  | ryan84@hotmail.com          | (373) 822-1521       | 48321 Bailey Glens, Port Carlos                 | NS         | Y3M6L7       |
+| 1000001944       | Male    | Allen       | Hernandez  | 30   | 908758262  | thomas70@ferguson.com       | (539) 376-1754 x502  | 467 Holland Forest Suite 332, Thompsonville     | NV         | Y3L 9E2      |
+| 1000002939       | Female  | Alyssa      | Dunn       | 51   | 834736228  | cheryl06@hotmail.com        | (434) 546-5030 x237  | 0819 Mathew Inlet Suite 107, Lauraview          | YT         | K9J 4V6      |
+| 1000004030       | Female  | Courtney    | Castro     | 53   | 320706455  | nathan12@gmail.com          | 553.894.8235         | 9403 Amanda Mission Suite 037, South Johnmouth  | NS         | T1M7N3       |
+| 1000004906       | Male    | Derek       | White      | 34   | 306868178  | youngtracy@garrett.net      | (974) 406-4141 x724  | 1099 Melanie Village, West Meganshire           | NL         | Y6C5T1       |
++------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+10 rows selected (0.037 seconds)
+Beeline version 1.2.1.spark2 by Apache Hive
+Closing: 0: jdbc:postgresql://10.3.58.109/userdb
+```
+    
+    
     2. Querying the source DBMS
 
 * **Step 3** Dynamic Enforcement
