@@ -59,6 +59,10 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
 
 # Steps
 
+* **Step 0** Hands-on LAB Environment overview
+You will find on Hands-on LAB laptop a sticker with your number id.
+Each time in the Hands-on LAB you see <yourID>, please replace <yourID> with the number as writen on the sticker.
+
 * **Step 1** Policy Exploration
     1. What is a policy?
     2. Active policy description
