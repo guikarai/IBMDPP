@@ -64,16 +64,16 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
     2. Active policy description
     3. Understanding the policy
 
-* **Step 2** Dynamic Enforcement
+* **Step 2** Connecting to a Source DBMS
     1. Connecting to a source DBMS
     2. Querying the source DBMS
-    3. Connect to IBM DPP to query a source DBMS
-    4. Querying the source DBMS as a Data Owner (DO)
-    4. Querying the source DBMS as a Data Administrator (DA)
-    4. Querying the source DBMS as Application1 (App1)    
+
+* **Step 3** Dynamic Enforcement
+    4. Querying IBM Data Privacy Passports as a Data Owner (DO)
+    4. Querying IBM Data Privacy Passports as a Data Administrator (DA)
+    4. Querying IBM Data Privacy Passports as Application1 (App1)    
 
 * **Step 3** Persisted Enforcement
-
     1. Creating a protected table for Data Administrator (DA) from the source to a PostgreSQL on Linux on IBM Z
     4. Querying the protected table of Data Administrator (DA)
     2. Creating a protected table from the source to Oracle on AWS
