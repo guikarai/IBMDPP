@@ -71,9 +71,35 @@ Each time in the Hands-on LAB you see <yourID>, please replace <yourID> with the
     3. Understanding the policy
 
 ## **Step 2** Connecting to a Source DBMS
-**Connecting to a source DBMS**
+**Using Apache Beeline to start a JDBC connection**
+
+Apache Beeline a Hive client that uses JDBC to connect to HiveServer2 and many DBMS (z/OS Db2, PostgreSQL, Oracle...). You can also use Beeline to access IBM Data Privacy Passports remotely. For following, we will use essentially Beeline to connect to both DBMS and IBM Data Privacy Passports.
+
+As any JDBC client, Beeline needs some parameters to be able to connect, and to execute commands on the connected DBMS. Commands may be SQL query. What is most of the time required is the following:
+```
+   -u <database url>               the JDBC URL to connect to
+   -n <username>                   the username to connect as
+   -p <password>                   the password to connect as
+   -d <driver class>               the driver class to use
+   -i <init file>                  script file for initialization
+   -e <query>                      query that should be executed
+```
+To connect to the source DBMS, you need to know that:
+* Target DBMS is postgreSQL
+* Url of the DBMS: **jdbc:postgresql://10.3.58.109/userdb**
+* Driver name is: **org.postgresql.Driver**
+* Authorized username: **myuser**
+* Password of the authorized username: **myuser**
+
+Now it is time to use beeline to connect to the source DBMS and to display the first 10 lines of the Customer table.
+
+**Querying the source DBMS**
+Please issue the following command:
 ```
 [root@rhl76dpp scripts]# beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p myuser -d org.postgresql.Driver -e 'select * from customer limit 10';
+```
+Result will be something similar as follow:
+```
 Connecting to jdbc:postgresql://10.3.58.109/userdb
 Connected to: PostgreSQL (version 10.9 (Ubuntu 10.9-0ubuntu0.18.04.1))
 Driver: PostgreSQL JDBC Driver (version 42.2.5)
@@ -96,9 +122,6 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 Beeline version 1.2.1.spark2 by Apache Hive
 Closing: 0: jdbc:postgresql://10.3.58.109/userdb
 ```
-    
-    
-    2. Querying the source DBMS
 
 * **Step 3** Dynamic Enforcement
     4. Querying IBM Data Privacy Passports as a Data Owner (DO)
