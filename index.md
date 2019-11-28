@@ -137,21 +137,90 @@ Closing: 0: jdbc:postgresql://10.3.58.109/userdb
 With IBM Data Privacy Passports, your users and applications must now connect to IBM DPP via JDBC, no more directly to the target DBMS. You can find below how a JDBC user can connect to IBM DPP.
 
 1. User to connect to IBM DPP URL, and with the appropriate JDBC driver and credentials.
-
-2a. Once connected and identified, user or application SQL query IBM DPP. IBM DPP thanks to the policy, has an already defined route to the target source DBMS.
-
-2b. IBM DPP will use the route, jdbc drivers, credentials, as defined in the policy, and will execute the SQL query.
-
-3a. DBMS send back the SQL query output o IBM DPP. Then, the Passport Controller gets clear data from source DBMS.
-
-3b. The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS.
-
-3c. IBM DPP via the Passport Controller send back the enforced data to the user.
+2. Once connected and identified, user or application SQL query IBM DPP. IBM DPP thanks to the policy, has an already defined route to the target source DBMS. IBM DPP will use the route, jdbc drivers, credentials, as defined in the policy, and will execute the SQL query.
+3. DBMS send back the SQL query output o IBM DPP. Then, the Passport Controller gets clear data from source DBMS. The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS. IBM DPP via the Passport Controller send back the enforced data to the user.
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/dynamic-enforcement.png)
 
-    4. Querying IBM Data Privacy Passports as a Data Owner (DO)
-    4. Querying IBM Data Privacy Passports as a Data Administrator (DA)
-    4. Querying IBM Data Privacy Passports as Application1 (App1)    
+**Querying IBM DPP as a Data Owner (D0)**
+Please issue the following command:
+```
+[root@rhl76dpp scripts]# beeline -u "jdbc:hive2://10.3.58.108:10010" -n DO -e "select * from LoZpostgresql.customer LIMIT 10;"
+```
+Result will be something similar as follow:
+```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1.spark2)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  | age  |    sin     |            email            |        phone         |                 mailing_address                 | prov_abbr  | postal_code  |
++------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+| 1000016268       | Female  | Madeline    | Campbell   | 39   | 346108285  | carrolljoseph@hill.com      | 1-394-776-2104       | 0649 Ann Greens, Edwardton                      | AB         | R9V7G8       |
+| 1000012605       | Female  | Lynn        | Scott      | 27   | 978982456  | janet64@hotmail.com         | (749) 623-9781       | 9800 Tina Crescent, North Alexandraton          | SK         | R2A5R8       |
+| 1000012979       | Female  | Lauren      | Arroyo     | 44   | 809852991  | scottwilson@foster.info     | 1-818-222-2486       | 065 Russell Dam Apt. 235, Newtonstad            | MB         | V6T 3Y3      |
+| 1000001690       | Male    | Anthony     | Mendoza    | 65   | 210726574  | cgarcia@simpson-howard.com  | 589-767-7808         | 1803 Roberson Spur, New Krista                  | AB         | L4B1A4       |
+| 1000011265       | Female  | Kimberly    | Quinn      | 62   | 262697551  | hendersonjames@price.biz    | 670 392 0575         | 638 Crystal Track, Port Stacy                   | AB         | P7B1C7       |
+| 1000014413       | Male    | Michael     | Carter     | 57   | 467383604  | ryan84@hotmail.com          | (373) 822-1521       | 48321 Bailey Glens, Port Carlos                 | NS         | Y3M6L7       |
+| 1000001944       | Male    | Allen       | Hernandez  | 30   | 908758262  | thomas70@ferguson.com       | (539) 376-1754 x502  | 467 Holland Forest Suite 332, Thompsonville     | NV         | Y3L 9E2      |
+| 1000002939       | Female  | Alyssa      | Dunn       | 51   | 834736228  | cheryl06@hotmail.com        | (434) 546-5030 x237  | 0819 Mathew Inlet Suite 107, Lauraview          | YT         | K9J 4V6      |
+| 1000004030       | Female  | Courtney    | Castro     | 53   | 320706455  | nathan12@gmail.com          | 553.894.8235         | 9403 Amanda Mission Suite 037, South Johnmouth  | NS         | T1M7N3       |
+| 1000004906       | Male    | Derek       | White      | 34   | 306868178  | youngtracy@garrett.net      | (974) 406-4141 x724  | 1099 Melanie Village, West Meganshire           | NL         | Y6C5T1       |
++------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+```
+
+**Querying IBM DPP as a Data Administrator (DA)**
+Please issue the following command:
+```
+[root@rhl76dpp scripts]# beeline -u "jdbc:hive2://10.3.58.108:10010" -n DA -p XXXXX -e "select * from LoZpostgresql.customer LIMIT 10;"
+```
+Result will be something similar as follow:
+```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1.spark2)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  |  age   |  sin   | email  | phone  | mailing_address  | prov_abbr  |                  postal_code                  |
++------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | RB3068INCfpAdZW7FMuvnAJL38cnmBV7KJ1DeXzoB/8=  |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | /9hohT8anKvtSnEyqZfepfzHbDlLFXmdx13ouJaFnSI=  |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | vfQC1ce6F+0zubeqnbDNisHfWgoSDaCojIHsN8colZM=  |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | RvCxYX0PhlvIsIYoM3g/EBswScg+yWG0HLwwuFB6C5o=  |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | fEmD7WR8pkI0J7mv7i3FcebNkUhZYTNDV6Sx0UbTt8U=  |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | T0NAsoOmvPEzrlS/Se1bAYQIwy7Wef0275+P21Lucu0=  |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | xUvB2vbFCq1esa15r+AqkwBVx7gmB0aCwm+bVP0f9oo=  |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | +nZnKTz2YQSmrLfswp1EfHGhIuAzkFzrBGNZFdjpJik=  |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | CNFsalM0lX+Tp126o60COkRHAUKh2QvcbM1E/fY42PU=  |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ww99SMybNHOPC5QFBS6kwOLxzXk2sYXGw3DCwzACCOU=  |
++------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+```
+
+**Querying IBM DPP as a Data Consummer (App1)**
+Please issue the following command:
+```
+[root@rhl76dpp scripts]# beeline -u "jdbc:hive2://10.3.58.108:10010" -n App1 -p XXXXX -e "select * from LoZpostgresql.customer LIMIT 10;"
+```
+Result will be something similar as follow:
+```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1.spark2)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  | age  |  sin   | email  | phone  | mailing_address  | prov_abbr  |                  postal_code                  |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 39   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | RB3068INCfpAdZW7FMuvnAJL38cnmBV7KJ1DeXzoB/8=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 27   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | SK         | /9hohT8anKvtSnEyqZfepfzHbDlLFXmdx13ouJaFnSI=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 44   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | MB         | vfQC1ce6F+0zubeqnbDNisHfWgoSDaCojIHsN8colZM=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 65   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | RvCxYX0PhlvIsIYoM3g/EBswScg+yWG0HLwwuFB6C5o=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 62   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | fEmD7WR8pkI0J7mv7i3FcebNkUhZYTNDV6Sx0UbTt8U=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 57   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | T0NAsoOmvPEzrlS/Se1bAYQIwy7Wef0275+P21Lucu0=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 30   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NV         | xUvB2vbFCq1esa15r+AqkwBVx7gmB0aCwm+bVP0f9oo=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 51   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | YT         | +nZnKTz2YQSmrLfswp1EfHGhIuAzkFzrBGNZFdjpJik=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | CNFsalM0lX+Tp126o60COkRHAUKh2QvcbM1E/fY42PU=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | ww99SMybNHOPC5QFBS6kwOLxzXk2sYXGw3DCwzACCOU=  |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+```
 
 * **Step 3** Persisted Enforcement
     1. Creating a protected table for Data Administrator (DA) from the source to a PostgreSQL on Linux on IBM Z
