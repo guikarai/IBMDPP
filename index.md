@@ -71,6 +71,13 @@ Each time in the Hands-on LAB you see <yourID>, please replace <yourID> with the
     3. Understanding the policy
 
 ## **Step 2** Connecting to a Source DBMS
+**The statu quo - Connecting to the DBMS**
+You can find below how a JDBC application use to connect to a DBMS. I took as example a connection to a Linux on IBM Z PostgreSQL.
+1. User connect to an URL pointing to the target DBMS. For such connection, it is mandatory to provide valid credentials, the name of the Database, driver name, ...
+2. Once connected, user can SQL query the DBMS according to the need.
+3. DBMS sent back SQL query output to the user.
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/IBM-DPP-Landscape.png?raw=true)
+
 **Using Apache Beeline to start a JDBC connection**
 
 Apache Beeline a Hive client that uses JDBC to connect to HiveServer2 and many DBMS (z/OS Db2, PostgreSQL, Oracle...). You can also use Beeline to access IBM Data Privacy Passports remotely. For following, we will use essentially Beeline to connect to both DBMS and IBM Data Privacy Passports.
