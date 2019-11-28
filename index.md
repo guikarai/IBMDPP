@@ -135,13 +135,19 @@ Closing: 0: jdbc:postgresql://10.3.58.109/userdb
 * **Step 3** Dynamic Enforcement
 
 With IBM Data Privacy Passports, your users and applications must now connect to IBM DPP via JDBC, no more directly to the target DBMS. You can find below how a JDBC user can connect to IBM DPP.
-* 1. User to connect to IBM DPP URL, and with the appropriate JDBC driver and credentials.
-* 2a. Once connected and identified, user or application SQL query IBM DPP. IBM DPP thanks to the policy, has an already defined route to the target source DBMS.
-* 2b. IBM DPP will use the route, jdbc drivers, credentials, as defined in the policy, and will execute the SQL query.
-* 3a. DBMS send back the SQL query output o IBM DPP. Then, the Passport Controller gets clear data from source DBMS.
-* 3b. The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS.
-* 3c. IBM DPP via the Passport Controller send back the enforced data to the user.
-![alt-text](https://github.com/guikarai/IBMDPP/blob/master/statuquo.png)
+
+1. User to connect to IBM DPP URL, and with the appropriate JDBC driver and credentials.
+
+2a. Once connected and identified, user or application SQL query IBM DPP. IBM DPP thanks to the policy, has an already defined route to the target source DBMS.
+
+2b. IBM DPP will use the route, jdbc drivers, credentials, as defined in the policy, and will execute the SQL query.
+
+3a. DBMS send back the SQL query output o IBM DPP. Then, the Passport Controller gets clear data from source DBMS.
+
+3b. The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS.
+
+3c. IBM DPP via the Passport Controller send back the enforced data to the user.
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/dynamic-enforcement.png)
 
     4. Querying IBM Data Privacy Passports as a Data Owner (DO)
     4. Querying IBM Data Privacy Passports as a Data Administrator (DA)
