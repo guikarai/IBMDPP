@@ -18,6 +18,10 @@ You can find below a schema explaining how a JDBC application connects to a DBMS
 :computer: Issue the command shown below to query the source DBMS.
 ```
 beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from customer limit 10;';
+```
+Expected output is:
+
+```
 Connecting to jdbc:postgresql://10.3.58.109/userdb
 Connected to: PostgreSQL (version 10.9 (Ubuntu 10.9-0ubuntu0.18.04.1))
 Driver: PostgreSQL JDBC Driver (version 42.2.5)
