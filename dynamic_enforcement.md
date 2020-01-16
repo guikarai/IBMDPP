@@ -46,8 +46,8 @@ You just SQL query:
 * used JDBC driver is: **org.postgresql.Driver**
 * the issued SQL Query is: **select * from customer limit 10;**
 
-:question: As a known an allowed user on DBMS, you are able from the source customer table to see content in clear.
-For the same SQL query, but with different users, as long as users have the read rights on table, they will see the same data. There is no difference according the user.
+:question: As a known an allowed user on DBMS, you are able from the source table to see content in the clear.
+For the same SQL query, but with different users, as long as users have the read right on the target table, they will see the same data, and the same way. There is no difference according to the user.
 
 :exclamation: Let's see how IBM Data Privacy Passports can help to change the experience at the consumption point
 
