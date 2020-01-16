@@ -1,5 +1,4 @@
 # IBM Data Privacy Passports Applied - Hands-on LABs
-
 Seen and used in IBM Systems Technical University
 * Upcoming May 25-29	TechU in Amsterdam, Netherlands
 
@@ -10,7 +9,7 @@ When you will complete this hands-on exploration of IBM Data Privacy Passports, 
 * How data is protected then enforced
 * How a TDO protects the data
 
-# Architecture
+# Hands-on LAB Architecture
 This journey requires an existing Linux on IBM Z environment provided to you by the hands-on LAB team. From there you will be able to connect to several DBMS and IBM Data Privacy Passports appliance.
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/IBM-DPP-Landscape.png?raw=true)
 
