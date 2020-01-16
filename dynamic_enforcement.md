@@ -15,7 +15,7 @@ You can find below a schema explaining how a JDBC application connects to a DBMS
 
 <picture here>
   
-Issue the command shown below to query the source DBMS.
+:computer: Issue the command shown below to query the source DBMS.
 ```
 beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from customer limit 10;';
 Connecting to jdbc:postgresql://10.3.58.109/userdb
@@ -46,10 +46,10 @@ You just SQL query:
 * used JDBC driver is: **org.postgresql.Driver**
 * the issued SQL Query is: **select * from customer limit 10;**
 
-As a known an allowed user on DBMS, you are able from the source customer table to see content in clear.
+:question: As a known an allowed user on DBMS, you are able from the source customer table to see content in clear.
 For the same SQL query, but with different users, as long as users have the read rights on table, they will see the same data. There is no difference according the user.
 
-Let's see how IBM Data Privacy Passports can help to change the experience at the consumption point
+:exclamation: Let's see how IBM Data Privacy Passports can help to change the experience at the consumption point
 
 ## 1.2 Understanding the Dynamic Enforcement
 
