@@ -59,13 +59,10 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
 
 # Steps
 
-## Step 1 - [Enabling Linux to use hardware encryption](https://github.com/guikarai/ELK-CPACF/blob/master/part1.md)
+## Step 1 - [Enforcement of the data](https://github.com/guikarai/IBMDPP/blob/master/enforcement.md)
 
-    1. Introduction to the pervasive encryption
-    2. Introduction to the Linux crypto stack
-    2. Enabling Linux to use the Hardware
-    3. Enabling OpenSSL to use the hardware acceleration support
-    4. Checking Hardware Crypto functions
+    1. Dynamic Enforcement
+    2. Persistent Enforcement
 
 ## Step 2 - [Deploying a docker based ELK stack running on LinuxONE Community Cloud.](https://github.com/guikarai/ELK-CPACF/blob/master/part2.md)
     
