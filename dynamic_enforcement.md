@@ -69,7 +69,7 @@ You can find below, a simplied view of the Dynamic Enforcement process:
 
 <picture here>
 
-### 1.2.1 SQL query of the Data Owner (DO):
+### 1.2.1 SQL query as a Data Owner (DO):
 
 Let's experience the Dynamic Enforcement function of IBM Data Privacy Passports. Let' assume you are the DO (Data Owner) of the customer table on the target DBMS.
 
@@ -105,11 +105,10 @@ Closing: 0: jdbc:hive2://10.3.58.108:10010
 :exclamation: Off-course the output looks like the same as before, we are the data owner of this table, so we can see all the data into the clear. But, as you can see also, you just SQL queried IBM Data Privacy Passports and not the source DBMS.
 A first, you just proved that the proxy function of IBM Data Privacy Passports works!
 
-### 1.2.2  SQL query of the Data Administrator (DA):
+### 1.2.2  SQL query as a Data Administrator (DA):
 Let's experience the Dynamic Enforcement function of IBM Data Privacy Passports again, but this time, let' assume you are the DA (Data Administrator) of the customer table on the target DBMS. As a Data Admnistrator you need administrative access to the data, the table. But it is not on your duties to keep and eye, and to fully understand the content of the customer table. It is a professionnal fault to do it.
 
 :computer: Issue the command shown below to query the source DBMS as a Data Administrator (DA):
-:computer: Issue the command shown below to query the source DBMS.
 ```
 beeline -u "jdbc:hive2://10.3.58.108:10010" -n DA -p XXXXX -e "select * from LoZpostgresql.customer LIMIT 10;"
 ```
@@ -137,25 +136,63 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 Beeline version 1.2.1 by Apache Hive
 Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
-:exclamation: What's a big change! You can SQL Query. You can assess there is data. But you can't understand the data, because according to your defined needs to know on the IBM Data Privacy Passport policy, it is stated that data need to be enforced (masking and hashing functions mainly).
+:exclamation: What's a big change! You can SQL Query. You can assess there is data. But you can't understand the data, because according to your defined needs to know on the IBM Data Privacy Passport policy, it is stated that **ALL data needs to be enforced** (masking and hashing functions mainly).
 * A first, you just proved that the proxy function of IBM Data Privacy Passports works!
-* Second, you just proved that as a Data Admin, you experience of the data comply strictly with your needs to know.
-* Third, you just proved that you experience of the data is different compared to Data Owner experience.
+* Second, you just proved that as a Data Admin, your experience of the data comply strictly with your needs to know.
+* Third, you just proved that your experience of the data is different compared to the Data Owner experience.
 
-### 1.2.3  SQL query of the Data Consummer (App1):
-:computer: Issue the command shown below to query the source DBMS.
+### 1.2.3  SQL query as a Data Consummer (App1):
+:computer: Issue the command shown below to query the source DBMS as a Data Consumer (App1):
 ```
 beeline -u "jdbc:hive2://10.3.58.108:10010" -n App1 -p XXXXX -e "select * from LoZpostgresql.customer LIMIT 10;"
 ```
 Expected output is:
 ```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  | age  |  sin   | email  | phone  | mailing_address  | prov_abbr  |                  postal_code                  |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 39   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | RB3068INCfpAdZW7FMuvnAJL38cnmBV7KJ1DeXzoB/8=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 27   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | SK         | /9hohT8anKvtSnEyqZfepfzHbDlLFXmdx13ouJaFnSI=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 44   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | MB         | vfQC1ce6F+0zubeqnbDNisHfWgoSDaCojIHsN8colZM=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 65   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | RvCxYX0PhlvIsIYoM3g/EBswScg+yWG0HLwwuFB6C5o=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 62   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | fEmD7WR8pkI0J7mv7i3FcebNkUhZYTNDV6Sx0UbTt8U=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 57   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | T0NAsoOmvPEzrlS/Se1bAYQIwy7Wef0275+P21Lucu0=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 30   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NV         | xUvB2vbFCq1esa15r+AqkwBVx7gmB0aCwm+bVP0f9oo=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 51   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | YT         | +nZnKTz2YQSmrLfswp1EfHGhIuAzkFzrBGNZFdjpJik=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | CNFsalM0lX+Tp126o60COkRHAUKh2QvcbM1E/fY42PU=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | ww99SMybNHOPC5QFBS6kwOLxzXk2sYXGw3DCwzACCOU=  |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+10 rows selected (0.539 seconds)
+Beeline version 1.2.1 by Apache Hive
+Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
+:exclamation: Another interresting change! You can SQL Query. You can assess there is data. But you can't understand some data, because according to your defined needs to know on the IBM Data Privacy Passport policy, it is stated that **several data needs to be enforced** (masking and hashing functions mainly) except (gender, age, prov_abbr).
+* A first, you just proved that the proxy function of IBM Data Privacy Passports works!
+* Second, you just proved that as a Data Consummper, your experience of the data comply strictly with your needs to know.
+* Third, you just proved that your experience of the data is different compared to the Data Owner experience, and the Data Administrator experience.
 
-:computer: Issue the command shown below to query the source DBMS.
+### 1.2.4  SQL query as an Unknown user (Test):
+We sawn with different users that the experience of data is different at the touch point thanks to the dynamic enforcement capability of IBM Data Privacy Passports. What is the behavior if an unknown user from Data Privacy Passports try to SQL query IBM Data Privacy Passports to reach a DBMS.
+
+:computer: Issue the command shown below to query the source DBMS as an unknown individual (eg. Test user):
 ```
 beeline -u "jdbc:hive2://10.3.58.108:10010" -n Test -p XXXXX -e "select * from LoZpostgresql.customer LIMIT 10;"
 ```
 Expected output is:
 ```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+Error: com.schedule1.datapassports.UnknownFunctionException: DP-0: unknown target '[TARGET_MISSING]' (state=,code=0)
+Closing: 0: jdbc:hive2://10.3.58.108:10010
+```
+:exclamation: Very interresting results! You can't SQL Query at all. The user being unknown from IBM Data Privacy Passports, IBM Data Privacy Passports will not execute the SQL query to the DBMS.
 
-## 1.2 Conclusions regarding the Dynamic Enforcement
+# 2. Persistant Enforcement with IBM Data Privacy Passports
+
+# 3. Conclusions
