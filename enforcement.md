@@ -204,4 +204,23 @@ Closing: 0: jdbc:hive2://10.3.58.108:10010
 
 ## 2. Persistant Enforcement with IBM Data Privacy Passports
 
+In the case of Persisted Enforcement, the Passport Controller is used to enforce data from a source DBMS and save the contents into a target DBMS. The enforcement is done entirely based on the policy. Here there will potentially be several copies of data depending on the different enforcement that needs to be applied for different applications.
+
+### 2.1 Direct Query of an Enforced Copy of the data
+Let's assume for test/dev purpose we need a copy of the data for an application development team. The team to create stats about age, gender according to some geos. They need to know is: Age, Gender, Prov_abbr.
+
+This corresponds to an exising policy attached to App1 user.
+
+An IBM Data Privacy Passports admin can create a persisted copy of the customer table for App1. It means that IBM Data Privacy Passports SQL Query a "Select * from customer" and the data is enforced for App1 eyes only. Results being saved in an enforced table named "customer_enforced_app1".
+
+As an enforced copy of the source data, the table "customer_enforced_app1" is self-sufficient. And can be drop anywhere and in any DBMS that can be connected to IBM Data Privacy Passports. The persisted enforced table can be queried directly, and doesn't requires to be accessed via IBM Data Privacy Passports.
+
+:computer: Issue the command shown below to query the Persisted Enforced copy of the source DBMS for App1:
+```
+beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from enforced_customer_app1 limit 10;';
+```
+Expected output is:
+```
+```
+
 ## 3. Conclusions
