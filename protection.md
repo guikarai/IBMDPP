@@ -26,7 +26,8 @@ Let's see in action both use cases.
 
 ## 1. Protection
 
-### 1.1 Protection of the data (data is protected at the exfiltration point and off the platform)
+### 1.1 Protection of the data
+:white_check_mark: Data is protected at the exfiltration point and off the platform.
 
 You can find below how an IBM Data Privacy Passports administrator creates a TDO, from a particular DBMS, to a target DBMS (source may be the target). I took as example a source DBMS being a Linux on IBM Z PostgreSQL, and a target DBMS being AWS Oracle.
 * **(1a)** DPP Admin connects to DPP and uses DPP SQL functionalities.
@@ -45,7 +46,21 @@ You can find below how a JDBC application experiences an SQL Query directly to a
 
 ### 1.2 Direct SQL query to an existing TDO
 
-:exclamation Data being protected for exfiltration, the data is secured. Instructions to decrypt the data is provided in the metadata. It will help Passport Controller to find-out the appropriate and required keys from key-stores.
+:exclamation: Data being protected for exfiltration, the data is secured. Instructions to decrypt the data is provided in the metadata. It will help Passport Controller to find-out the appropriate and required keys from key-stores.
+
 :exclamation: By the policy it is possible to let some column into the clear.
 
+:computer: Let's experience what data looks like in a TDO:
+
+```
+beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from enforced_customer_app1 limit 10;';
+```
+Expected output is:
+```
+```
+:exclamation: Off-course we can't understand anything, we just query a TDO directly. What we see is security mecanism and the data together. As a TDO, data is secured no matter where it is, and no matter the security of environment the data is crossing.
+
+There is only one way to get access to the data of the TDO in the clear, this is via IBM Data Privacy Passports.
+
 ## 2. Protect and then enforce
+:white_check_mark: Data is protected at the exfiltration point and off the platform, and data is enforced at the consumption point.
