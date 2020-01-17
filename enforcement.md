@@ -16,13 +16,9 @@ To test the Dynamic Enforcement capabilities of IBM Data Privacy Passports, from
 
 ### 1.1 The statu quo - Connecting to the DBMS
 
-You can find below a schema explaining how a JDBC application connects to a DBMS. In this schema, the DBMS is a PostgreSQL running on Linux on IBM Z (Private Cloud).
-* **(1)** User connect to an URL pointing to the target DBMS. For such connection, it is mandatory to provide valid credentials, the name of the Database, driver name, ...
-* **(2)** Once connected, user can SQL query the DBMS according to the need.
-* **(3)** DBMS sent back SQL query output to the user.
-**Note:** There is no copy of the data.
+You can find below a schema explaining how a JDBC application connects to a DBMS. In this schema, the DBMS is a PostgreSQL running on Linux on IBM Z (Private Cloud). User connect to an URL pointing to the target DBMS. For such connection, it is mandatory to provide valid credentials, the name of the Database, driver name, ... Once connected, user can SQL query the DBMS according to the need. DBMS sent back SQL query output to the user.
 
-<picture here>
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/statuquo.png?raw=true)
   
 :computer: Issue the command shown below to query the source DBMS.
 ```
@@ -76,7 +72,7 @@ You can find below, a simplied view of the Dynamic Enforcement process:
 * **(3b)** The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS.
 * **(3c)** IBM DPP via the Passport Controller send back the enforced data to the user.
 
-<picture here>
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Dynamic-enforcement.png?raw=true)
 
 #### 1.2.1 SQL query as a Data Owner (DO):
 
@@ -213,7 +209,10 @@ This corresponds to an exising policy attached to App1 user.
 
 An IBM Data Privacy Passports admin can create a persisted copy of the customer table for App1. It means that IBM Data Privacy Passports SQL Query a "Select * from customer" and the data is enforced for App1 eyes only. Results being saved in an enforced table named "customer_enforced_app1".
 
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Persisted-enforcement.png?raw=true)
+
 As an enforced copy of the source data, the table "customer_enforced_app1" is self-sufficient. And can be drop anywhere and in any DBMS that can be connected to IBM Data Privacy Passports. The persisted enforced table can be queried directly, and doesn't requires to be accessed via IBM Data Privacy Passports.
+
 
 :computer: Issue the command shown below to query the Persisted Enforced copy of the source DBMS for App1:
 ```
