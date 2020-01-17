@@ -66,8 +66,7 @@ Let's now use IBM Data Privacy Passports in order to adapt the SQL Query content
 
 You can find below, a simplied view of the Dynamic Enforcement process:
 * **(1)** User to connect to IBM DPP URL, and with the appropriate JDBC driver and credentials.
-* **(2a)** Once connected and identified, user or application SQL query IBM DPP. IBM DPP thanks to the policy, has an already defined route to the target source DBMS.
-* **(2b)** IBM DPP will use the route, jdbc drivers, credentials, as defined in the policy, and will execute the SQL query.
+* **(2)** Once connected and identified, user or application SQL query IBM DPP. IBM DPP thanks to the policy, has an already defined route to the target source DBMS. IBM DPP will use the route, jdbc drivers, credentials, as defined in the policy, and will execute the SQL query.
 * **(3a)** DBMS send back the SQL query output o IBM DPP. Then, the Passport Controller gets clear data from source DBMS.
 * **(3b)** The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS.
 * **(3c)** IBM DPP via the Passport Controller send back the enforced data to the user.
