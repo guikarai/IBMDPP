@@ -197,7 +197,7 @@ Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
 :exclamation: Very interresting results! You can't SQL Query at all. The user being unknown from IBM Data Privacy Passports, IBM Data Privacy Passports will not execute the SQL query to the DBMS.
 
-# 2. Persistant Enforcement with IBM Data Privacy Passports
+# 2. Persisted Enforcement with IBM Data Privacy Passports
 
 In the case of Persisted Enforcement, the Passport Controller is used to enforce data from a source DBMS and save the contents into a target DBMS. The enforcement is done entirely based on the policy. Here there will potentially be several copies of data depending on the different enforcement that needs to be applied for different applications.
 
