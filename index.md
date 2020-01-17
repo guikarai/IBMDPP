@@ -59,45 +59,29 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
 
 # Steps
 
-## **Step 0** Hands-on LAB Environment overview
+## Step 1 - [Enabling Linux to use hardware encryption](https://github.com/guikarai/ELK-CPACF/blob/master/part1.md)
 
-You will find on Hands-on LAB laptop a sticker with your number id.
+    1. Introduction to the pervasive encryption
+    2. Introduction to the Linux crypto stack
+    2. Enabling Linux to use the Hardware
+    3. Enabling OpenSSL to use the hardware acceleration support
+    4. Checking Hardware Crypto functions
 
-Each time in the Hands-on LAB you see <yourID>, please replace <yourID> with the number as writen on the sticker.
+## Step 2 - [Deploying a docker based ELK stack running on LinuxONE Community Cloud.](https://github.com/guikarai/ELK-CPACF/blob/master/part2.md)
+    
+    1. What the ELK..?!
+    2. What to keep in mind about ELK?
+    3. Cloning the ELK-CPACF github repository
+    4. Deploying an ELK Docker based stack
+    5. Tooling for Elasticsearch
+    6. Seting-up local linux and crypto data collection
 
-## **Step 1** Policy Exploration
-    1. What is a policy?
-    2. Active policy description
-    3. Understanding the policy
+## Step 3 - [Creating a crypto activity dashboard running on LinuxONE Community Cloud.](https://github.com/guikarai/ELK-CPACF/blob/master/part3.md)
 
-## **Step 2** Connecting to a Source DBMS
-
-**The statu quo - Connecting to the DBMS**
-
-You can find below how a JDBC application use to connect to a DBMS. I took as example a connection to a Linux on IBM Z PostgreSQL.
-1. User connect to an URL pointing to the target DBMS. For such connection, it is mandatory to provide valid credentials, the name of the Database, driver name, ...
-2. Once connected, user can SQL query the DBMS according to the need.
-3. DBMS sent back SQL query output to the user.
-![alt-text](https://github.com/guikarai/IBMDPP/blob/master/statuquo.png)
-
-**Using Apache Beeline to start a JDBC connection**
-
-Apache Beeline a Hive client that uses JDBC to connect to HiveServer2 and many DBMS (z/OS Db2, PostgreSQL, Oracle...). You can also use Beeline to access IBM Data Privacy Passports remotely. For following, we will use essentially Beeline to connect to both DBMS and IBM Data Privacy Passports.
-
-As any JDBC client, Beeline needs some parameters to be able to connect, and to execute commands on the connected DBMS. Commands may be SQL query. What is most of the time required is the following:
-```
-   -u <database url>               the JDBC URL to connect to
-   -n <username>                   the username to connect as
-   -p <password>                   the password to connect as
-   -d <driver class>               the driver class to use
-   -i <init file>                  script file for initialization
-   -e <query>                      query that should be executed
-```
-To connect to the source DBMS, you need to know that:
-* Target DBMS is postgreSQL
-* Url of the DBMS: **jdbc:postgresql://10.3.58.109/userdb**
-* Driver name is: **org.postgresql.Driver**
-* Authorized username: **myuser**
-* Password of the authorized username: **myuser**
-
-Now it is time to use beeline to connect to the source DBMS and to display the first 10 lines of the Customer table.
+    1. Accessing to Kibana
+    2. Sourcing the ElasticSearch DataSource
+    3. Creating your first search with Kibana
+    4. Creating your first charts with Kibana
+    5. Creating your first dashboard with Kibana
+    6. Sharing your first crypto dashboard
+    
