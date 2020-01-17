@@ -1,4 +1,12 @@
-# 1. Dynamic Enforcement with IBM Data Privacy Passports
+# Enforcement of the data
+
+The Passport Controller is a data broker that provides an intercept point to work in cooperation with the Trust Authority to to enforce data protection policies. The Passport Controller gets clear data from source DBMS from then there a few options:
+* **Dynamic Enforcement** – In this case the Passport Controller directly enforces the data (according to the policy) coming from the source DBMS. In this case the Passport Controller intercepts the queries that would regularly be going to the source DBMS. There is no copy of the data.
+* **Persisted Enforcement** – In this case the Passport Controller is used to enforce data from a source DBMS and save the contents into a target DBMS. The enforcement is done entirely based on the policy. Here there will potentially be several copies of data depending on the different enforcement that needs to be applied for different applications.
+
+Let's see in action both the Dynamic Enforcement and the Persisted Enforcement.
+
+## 1. Dynamic Enforcement with IBM Data Privacy Passports
 
 IBM Data Privacy Passports and its Passport Controller gets clear data from source DBMS from then there it can perform Dynamic Enforcement. In this case the Passport Controller directly enforces the data (according to the policy) coming from the source DBMS. In this case the Passport Controller intercepts the queries that would regularly be going to the source DBMS. There is no copy of the data.
 
@@ -6,12 +14,13 @@ To test the Dynamic Enforcement capabilities of IBM Data Privacy Passports, from
 
 **Important note:** As of today, IBM DPP is still announced as a beta program, so the following may change in the future.
 
-## 1.1 The statu quo - Connecting to the DBMS
+### 1.1 The statu quo - Connecting to the DBMS
 
 You can find below a schema explaining how a JDBC application connects to a DBMS. In this schema, the DBMS is a PostgreSQL running on Linux on IBM Z (Private Cloud).
 * **(1)** User connect to an URL pointing to the target DBMS. For such connection, it is mandatory to provide valid credentials, the name of the Database, driver name, ...
 * **(2)** Once connected, user can SQL query the DBMS according to the need.
 * **(3)** DBMS sent back SQL query output to the user.
+**Note:** There is no copy of the data.
 
 <picture here>
   
@@ -55,7 +64,7 @@ For the same SQL query, but with different users, as long as users have the read
 
 :exclamation: Let's see how IBM Data Privacy Passports can help to change the experience at the consumption point
 
-## 1.2 Understanding the Dynamic Enforcement
+### 1.2 Understanding the Dynamic Enforcement
 
 Let's now use IBM Data Privacy Passports in order to adapt the SQL Query content according users need to know. To do so, we will SQL Query IBM Data Privacy Passports directly, and no more the source DBMS. IBM Data Privacy Passports, on behalf of the user, will execute the SQL Query to the target DBMS. According to users issuing the SQL Query, IBM Data Privacy Passports will apply what is specified in the policy and respect the need to know policy for each known users.
 
@@ -69,7 +78,7 @@ You can find below, a simplied view of the Dynamic Enforcement process:
 
 <picture here>
 
-### 1.2.1 SQL query as a Data Owner (DO):
+#### 1.2.1 SQL query as a Data Owner (DO):
 
 Let's experience the Dynamic Enforcement function of IBM Data Privacy Passports. Let' assume you are the DO (Data Owner) of the customer table on the target DBMS.
 
@@ -105,7 +114,7 @@ Closing: 0: jdbc:hive2://10.3.58.108:10010
 :exclamation: Off-course the output looks like the same as before, we are the data owner of this table, so we can see all the data into the clear. But, as you can see also, you just SQL queried IBM Data Privacy Passports and not the source DBMS.
 A first, you just proved that the proxy function of IBM Data Privacy Passports works!
 
-### 1.2.2  SQL query as a Data Administrator (DA):
+#### 1.2.2  SQL query as a Data Administrator (DA):
 Let's experience the Dynamic Enforcement function of IBM Data Privacy Passports again, but this time, let' assume you are the DA (Data Administrator) of the customer table on the target DBMS. As a Data Admnistrator you need administrative access to the data, the table. But it is not on your duties to keep and eye, and to fully understand the content of the customer table. It is a professionnal fault to do it.
 
 :computer: Issue the command shown below to query the source DBMS as a Data Administrator (DA):
@@ -141,7 +150,7 @@ Closing: 0: jdbc:hive2://10.3.58.108:10010
 * Second, you just proved that as a Data Admin, your experience of the data comply strictly with your needs to know.
 * Third, you just proved that your experience of the data is different compared to the Data Owner experience.
 
-### 1.2.3  SQL query as a Data Consummer (App1):
+#### 1.2.3  SQL query as a Data Consummer (App1):
 :computer: Issue the command shown below to query the source DBMS as a Data Consumer (App1):
 ```
 beeline -u "jdbc:hive2://10.3.58.108:10010" -n App1 -p XXXXX -e "select * from LoZpostgresql.customer LIMIT 10;"
@@ -175,7 +184,7 @@ Closing: 0: jdbc:hive2://10.3.58.108:10010
 * Second, you just proved that as a Data Consummper, your experience of the data comply strictly with your needs to know.
 * Third, you just proved that your experience of the data is different compared to the Data Owner experience, and the Data Administrator experience.
 
-### 1.2.4  SQL query as an Unknown user (Test):
+#### 1.2.4  SQL query as an Unknown user (Test):
 We sawn with different users that the experience of data is different at the touch point thanks to the dynamic enforcement capability of IBM Data Privacy Passports. What is the behavior if an unknown user from Data Privacy Passports try to SQL query IBM Data Privacy Passports to reach a DBMS.
 
 :computer: Issue the command shown below to query the source DBMS as an unknown individual (eg. Test user):
@@ -193,6 +202,6 @@ Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
 :exclamation: Very interresting results! You can't SQL Query at all. The user being unknown from IBM Data Privacy Passports, IBM Data Privacy Passports will not execute the SQL query to the DBMS.
 
-# 2. Persistant Enforcement with IBM Data Privacy Passports
+## 2. Persistant Enforcement with IBM Data Privacy Passports
 
-# 3. Conclusions
+## 3. Conclusions
