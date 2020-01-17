@@ -125,5 +125,5 @@ Expected output is:
 You can find below a summary of the different Protection use cases.
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Protection-matrix.png?raw=true)
 
-This close the Data Enforcement chapter. Next chapter in this hands-on labs is [Audit trail](https://github.com/guikarai/IBMDPP/blob/master/Audit-trail.md).
+This close the Data Enforcement chapter. Next chapter in this hands-on labs is [Audit trail](https://github.com/guikarai/IBMDPP/blob/master/audit-trail.md).
 
