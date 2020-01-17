@@ -12,7 +12,7 @@ When you will complete this hands-on exploration of IBM Data Privacy Passports, 
 This journey requires an existing Linux on IBM Z environment provided to you by the hands-on LAB team. 
 
 From there you will be able to connect to several tables of different DBMS directly or via IBM Data Privacy Passports:
-![alt-text](https://github.com/guikarai/IBMDPP/blob/master/IBM-DPP-Landscape.png?raw=true)
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Hands-on-labs.png?raw=true)
 
 1. User to experience direct connection to a data source, or a TDO
 2. User to experience Dynamic Enforcement of the data thanks to IBM Data Privacy Passports.
