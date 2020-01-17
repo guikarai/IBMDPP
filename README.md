@@ -57,7 +57,7 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
     3. Protection – In this case the Passport Controller protects the data (according to the policy) and stores the protected data (TDOs) into the target DBMS. Here there is a single copy of data saved as TDOs.
     4. Protect and then enforce –In this case, the Passport Controller will be established as a proxy for accessing the protected table and will intercept the SQL requests and apply enforcement to the data before it is returned to the consumer. This is using a single copy of the data to provide multiple views.
 
-# Steps
+# Hands-on LAB steps
 
 ## Step 1 - [A policy to rules them all](https://github.com/guikarai/ELK-CPACF/blob/master/part3.md)
 
