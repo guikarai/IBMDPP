@@ -12,7 +12,7 @@ IBM Data Privacy Passports and its Passport Controller gets clear data from sour
 
 To test the Dynamic Enforcement capabilities of IBM Data Privacy Passports, from your Hands-on LAB machine, you will use Apache Beeline to to connect to multiple different DBMS and IBM Data Privacy Passports thanks to JDBC.
 
-**Important note:** As of today, IBM DPP is still announced as a beta program, so the following may change in the future.
+:warning: **Important note:** As of today, IBM DPP is still announced as a beta program, so the following may change in the future.
 
 ### 1.1 The statu quo - Connecting to the DBMS
 
