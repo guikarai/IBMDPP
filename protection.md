@@ -1,6 +1,6 @@
 # Protection of the data
 
-The goal is: ** Is to protect the data at the point of exfiltration**. The main benefit is that data is secured and protected off the IBM Z platform.
+The goal is: **Is to protect the data at the point of exfiltration**. The main benefit is that data is secured and protected off the IBM Z platform.
 
 The Passport Controller is a data broker that provides an intercept point to work in cooperation with the Trust Authority to transform raw data into Trusted Data Objects. This is the data protection activity.
 
