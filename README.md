@@ -52,32 +52,27 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
 * **Trust Authority:** The Trust Authority is where the policy governing the protection and usage of the data is maintained. The Trust Authority also serves as the main key store for the Data Privacy Passports solution. The Passport Controller communicates with the Trust Authority to obtain policy information and keys. An enterprise Trust Authority requires performant, scalable, and robust cryptographic and key management services making it an ideal match for IBM Z. For the initial delivery the Trust Authority and Passport Controller will be deployed together into a single Secure Service Container running on either IBM z15™ or IBM LinuxONE™ III. Note – The sources and target DBMS are not required to run on IBM Z or LinuxONE servers. The initial delivery supports SQL data sources accessed via JDBC. 
 
 * **Passport Controller:** The Passport Controller is a data broker that provides an intercept point to work in cooperation with the Trust Authority to transform raw data into Trusted Data Objects. It also serves to enforce data protection policies. The Passport Controller gets clear data from source DBMS from then there a few options:
-1. Dynamic Enforcement – In this case the Passport Controller directly enforces the data (according to the policy) coming from the source DBMS. In this case the Passport Controller intercepts the queries that would regularly be going to the source DBMS. There is no copy of the data.
-2. Persisted Enforcement – In this case the Passport Controller is used to enforce data from a source DBMS and save the contents into a target DBMS. The enforcement is done entirely based on the policy. Here there will potentially be several copies of data depending on the different enforcement that needs to be applied for different applications.
-3. Protection – In this case the Passport Controller protects the data (according to the policy) and stores the protected data (TDOs) into the target DBMS. Here there is a single copy of data saved as TDOs.
-4. Protect and then enforce –In this case, the Passport Controller will be established as a proxy for accessing the protected table and will intercept the SQL requests and apply enforcement to the data before it is returned to the consumer. This is using a single copy of the data to provide multiple views.
+    1. Dynamic Enforcement – In this case the Passport Controller directly enforces the data (according to the policy) coming from the source DBMS. In this case the Passport Controller intercepts the queries that would regularly be going to the source DBMS. There is no copy of the data.
+    2. Persisted Enforcement – In this case the Passport Controller is used to enforce data from a source DBMS and save the contents into a target DBMS. The enforcement is done entirely based on the policy. Here there will potentially be several copies of data depending on the different enforcement that needs to be applied for different applications.
+    3. Protection – In this case the Passport Controller protects the data (according to the policy) and stores the protected data (TDOs) into the target DBMS. Here there is a single copy of data saved as TDOs.
+    4. Protect and then enforce –In this case, the Passport Controller will be established as a proxy for accessing the protected table and will intercept the SQL requests and apply enforcement to the data before it is returned to the consumer. This is using a single copy of the data to provide multiple views.
 
 # Steps
 
-## Step 1 - [Enforcement of the data](https://github.com/guikarai/IBMDPP/blob/master/enforcement.md)
+## Step 1 - [A policy to rules them all](https://github.com/guikarai/ELK-CPACF/blob/master/part3.md)
+
+    1. Browsing the policy
+    2. Understanding the policy
+    3. Policy status
+
+## Step 2 - [Enforcement of the data](https://github.com/guikarai/IBMDPP/blob/master/enforcement.md)
 
     1. Dynamic Enforcement
     2. Persistent Enforcement
+    3. Conclusions
 
-## Step 2 - [Deploying a docker based ELK stack running on LinuxONE Community Cloud.](https://github.com/guikarai/ELK-CPACF/blob/master/part2.md)
-    
-    1. What the ELK..?!
-    2. What to keep in mind about ELK?
-    3. Cloning the ELK-CPACF github repository
-    4. Deploying an ELK Docker based stack
-    5. Tooling for Elasticsearch
-    6. Seting-up local linux and crypto data collection
+## Step 3 - [Protection of the data](https://github.com/guikarai/IBMDPP/blob/master/protection.md)
 
-## Step 3 - [Creating a crypto activity dashboard running on LinuxONE Community Cloud.](https://github.com/guikarai/ELK-CPACF/blob/master/part3.md)
-
-    1. Accessing to Kibana
-    2. Sourcing the ElasticSearch DataSource
-    3. Creating your first search with Kibana
-    4. Creating your first charts with Kibana
-    5. Creating your first dashboard with Kibana
-    6. Sharing your first crypto dashboard
+    1. Protection
+    2. Enforce then protect
+    3. Conclusions
