@@ -64,3 +64,60 @@ There is only one way to get access to the data of the TDO in the clear, this is
 
 ## 2. Protect and then enforce
 :white_check_mark: Data is protected at the exfiltration point and off the platform, and data is enforced at the consumption point.
+
+You can find below how a JDBC application experiences an SQL Query to a TDO via IBM Data Privacy Passports.
+(2a) User connect to an URL pointing to IBM Data Privacy Passports. For such connection, it is mandatory to provide valid credentials, the name of the TDO, driver name, ...
+(2b) IBM Data Privacy Passports checks in the policy the DbViews section to find the appropriate JDBC connection profile to SQL query the TDO.
+(2c) DBMS sends back SQL query output to IBM Data Privacy Passports as it is (protected data).
+(2d) The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS.
+(2e) IBM Data Privacy Passports via the Passport Controller send back the data (enforced data) to the user.
+
+<picture here>
+
+Let's SQL query a TDO via IBM Data Privacy Passports with different users.
+
+### 2.1 SQL query as a Data Owner (DO) of a TDO via IBM Data Privacy Passports:
+
+:computer: Let's experience what data looks like in a TDO:
+
+```
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n DO -p XXXXX -e "select * from AWSpostgresql.protected_customer_App1 LIMIT 10;"
+```
+Expected output is:
+```
+```
+
+### 2.2 SQL query as a Data Administrator (DA) of a TDO via IBM Data Privacy Passports:
+
+:computer: Let's experience what data looks like in a TDO:
+
+```
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n DA -p XXXXX -e "select * from AWSpostgresql.protected_customer_App1 LIMIT 10;"
+```
+Expected output is:
+```
+```
+
+### 2.3 SQL query as a Data Consummer (App1) of a TDO via IBM Data Privacy Passports:
+
+:computer: Let's experience what data looks like in a TDO:
+
+```
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n App1 -p XXXXX -e "select * from AWSpostgresql.protected_customer_App1 LIMIT 10;"
+```
+Expected output is:
+```
+```
+
+### 2.4 SQL query as an unknow user (Test) of a TDO via IBM Data Privacy Passports:
+
+:computer: Let's experience what data looks like in a TDO:
+
+```
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n Test -p XXXXX -e "select * from AWSpostgresql.protected_customer_App1 LIMIT 10;"
+```
+Expected output is:
+```
+```
+
+## 3. Conclusions
