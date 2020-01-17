@@ -223,4 +223,7 @@ Expected output is:
 
 # 3. Conclusions
 
-This close the Data Enforcement chapter. Next chapter in this hands-on labs is "Data Protection".
+You can find below a summary of the different Enforcement use cases.
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Enforcement-matrix.png?raw=true)
+
+This close the Data Enforcement chapter. Next chapter in this hands-on labs is [Protection of the data](https://github.com/guikarai/IBMDPP/blob/master/protection.md).
