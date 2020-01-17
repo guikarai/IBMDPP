@@ -222,3 +222,5 @@ Expected output is:
 ```
 
 # 3. Conclusions
+
+This close the Data Enforcement chapter. Next chapter in this hands-on labs is "Data Protection".
