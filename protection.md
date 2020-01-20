@@ -27,7 +27,7 @@ Let's see in action both use cases.
 ## 1. Data Protection with IBM Data Privacy Passports
 
 ### 1.1 Protection of the data
-:white_check_mark: Data is protected at the exfiltration point and off the platform.
+:white_check_mark: **Objective:** Data is protected at the exfiltration point and off the platform.
 
 You can find below how an IBM Data Privacy Passports administrator creates a TDO, from a particular DBMS, to a target DBMS (source may be the target). I took as example a source DBMS being a Linux on IBM Z PostgreSQL, and a target DBMS being AWS Oracle.
 * **(1a)** DPP Admin connects to DPP and uses DPP SQL functionalities.
@@ -63,7 +63,7 @@ Expected output is:
 There is only one way to get access to the data of the TDO in the clear, this is via IBM Data Privacy Passports.
 
 ## 2. Protection and then enforcement of the data with IBM Data Privacy Passports
-:white_check_mark: Data is protected at the exfiltration point and off the platform, and data is enforced at the consumption point.
+:white_check_mark: **Objective:** Data is protected at the exfiltration point and off the platform, and data is enforced at the consumption point.
 
 You can find below how a JDBC application experiences an SQL Query to a TDO via IBM Data Privacy Passports.
 * **(1)** User connect to an URL pointing to IBM Data Privacy Passports. For such connection, it is mandatory to provide valid credentials, the name of the TDO, driver name, ... 
