@@ -24,7 +24,7 @@ There are two main data protection use cases:
 
 Let's see in action both use cases.
 
-## 1. Protection
+## 1. Data Protection with IBM Data Privacy Passports
 
 ### 1.1 Protection of the data
 :white_check_mark: Data is protected at the exfiltration point and off the platform.
@@ -62,7 +62,7 @@ Expected output is:
 
 There is only one way to get access to the data of the TDO in the clear, this is via IBM Data Privacy Passports.
 
-## 2. Protect and then enforce
+## 2. Protection and then enforcement of the data with IBM Data Privacy Passports
 :white_check_mark: Data is protected at the exfiltration point and off the platform, and data is enforced at the consumption point.
 
 You can find below how a JDBC application experiences an SQL Query to a TDO via IBM Data Privacy Passports.
