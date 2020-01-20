@@ -38,7 +38,7 @@ IBM Data Privacy Passports plays a critical roles enforcing/protecting the data.
 * abbends
 * error processes
 
-There is a hierarchy of logs than can be accessed and used as evidence in case of a fine investigation.
+There is a hierarchy of logs than generated in the background. Such logs can be used as evidence in case of a fine investigation.
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/audit-trail.png?raw=true)
 
 ## 3. Thank you
