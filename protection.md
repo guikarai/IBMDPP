@@ -42,7 +42,7 @@ You can find below how a JDBC application experiences an SQL Query directly to a
 
 **Note:** IBM DPP will must use a valid credentials on target DBMS in order to be able to create the TDO table.
 
-<picture here>
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Protection.png?raw=true)
 
 ### 1.2 Direct SQL query to an existing TDO
 
@@ -72,7 +72,7 @@ You can find below how a JDBC application experiences an SQL Query to a TDO via 
 (2d) The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS.
 (2e) IBM Data Privacy Passports via the Passport Controller send back the data (enforced data) to the user.
 
-<picture here>
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Protect-then-enforce.png?raw=true)
 
 Let's SQL query a TDO via IBM Data Privacy Passports with different users.
 
