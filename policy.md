@@ -11,6 +11,7 @@ IBM Data Privacy Passports focuses on data structures and data elements as the â
 
 
 You can find below an high level orverview of how a policy is organized:
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/policy-block-structure.png?raw=true)
 
 There are several important sections/blocks in a policy:
 
