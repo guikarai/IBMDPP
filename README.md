@@ -59,7 +59,7 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
 
 # Hands-on LAB steps
 
-## Step 1 - [A policy to rules them all](https://github.com/guikarai/ELK-CPACF/blob/master/part3.md)
+## Step 1 - [A policy to rules them all](https://github.com/guikarai/IBMDPP/blob/master/policy.md)
 
     1. Policy content, structure and blocks
     2. Query the Policy and its status
