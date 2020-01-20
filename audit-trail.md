@@ -31,14 +31,14 @@ As you can see, we can get usefull information including the following:
 * When:
 * By who:
 
-## 2. Other audits
-IBM Data Privacy Passports plays a critical roles enforcing/protecting the data. IBM Data Privacy Passports generates multiple fine logs in order to capture:
+## 2. Internal Audit Architecture
+IBM Data Privacy Passports plays a critical roles enforcing/protecting the data. For your information, IBM Data Privacy Passports generates multiple fine logs in order to capture:
 * executed queries
-* emiteed events and incidents
+* emited events and incidents
 * abbends
-* error processes
+* error of processes
 
-There is a hierarchy of logs than generated in the background. Such logs can be used as evidence in case of a fine investigation.
+There is a full hierarchy of logs that is generated in the background. Such logs can be used as evidence in case of a fine investigation.
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/audit-trail.png?raw=true)
 
 ## 3. Thank you
