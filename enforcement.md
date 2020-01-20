@@ -221,7 +221,7 @@ Expected output is:
 ```
 ```
 
-# 3. Conclusions
+# 3. Conclusions and next steps
 
 You can find below a summary of the different Enforcement use cases.
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Enforcement-matrix.png?raw=true)
