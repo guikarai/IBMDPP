@@ -63,6 +63,7 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
 
     1. Policy content, structure and blocks
     2. Query the Policy and its status
+    3. Next steps
 
 ## Step 2 - [Enforcement of the data](https://github.com/guikarai/IBMDPP/blob/master/enforcement.md)
 
@@ -72,9 +73,9 @@ There are 4 key components of Data Privacy Passports - Policy, Trust Authority, 
 
 ## Step 3 - [Protection of the data](https://github.com/guikarai/IBMDPP/blob/master/protection.md)
 
-    1. Protection
-    2. Enforce then protect
-    3. Conclusions
+    1. Data Protection with IBM Data Privacy Passports
+    2. Protection and then enforcement of the data with IBM Data Privacy Passports
+    3. Conclusions and next steps
     
 ## Step 4 - [Audit trail](https://github.com/guikarai/IBMDPP/blob/master/audit-trail.md)
 
