@@ -13,11 +13,11 @@ Such activities needs to be logged acurrately for both security and compliance r
 
 ## 1. Query audit
 
-IBM Data Privacy Passports is based on a engine accepting some command lines. One of this command line **"@DP show metrics"** dislayed the latest queries addressed and executed by IBM Data Privacy Passports.
+IBM Data Privacy Passports is based on a engine accepting some command lines. One of this command line **"@dp show metrics"** dislayed the latest queries addressed and executed by IBM Data Privacy Passports.
 
 :computer: Issue the command shown below to query as an IBM Data Privacy Passports Administrator the query log:
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n DAUser -p XXXXX -e "@DP show metrics";
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n DAUser -p XXXXX -e "@dp show metrics";
 ```
 Expected output is:
 
