@@ -17,7 +17,7 @@ IBM Data Privacy Passports is based on a engine accepting some command lines. On
 
 :computer: Issue the command shown below to query as an IBM Data Privacy Passports Administrator the query log:
 ```
-beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from customer limit 10;';
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n DAUser -p XXXXX -e "@DP show metrics";
 ```
 Expected output is:
 
