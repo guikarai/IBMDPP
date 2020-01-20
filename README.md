@@ -1,7 +1,5 @@
 # IBM Data Privacy Passports Applied - Hands-on LABs
 Seen and used in IBM Systems Technical University
-* Upcoming May 25-29	TechU in Amsterdam, Netherlands
-
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/amsterdam-2020-banner.png?raw=true)
 
 # About this Hands-on LAB
