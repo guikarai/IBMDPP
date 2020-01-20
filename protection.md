@@ -66,11 +66,11 @@ There is only one way to get access to the data of the TDO in the clear, this is
 :white_check_mark: Data is protected at the exfiltration point and off the platform, and data is enforced at the consumption point.
 
 You can find below how a JDBC application experiences an SQL Query to a TDO via IBM Data Privacy Passports.
-(2a) User connect to an URL pointing to IBM Data Privacy Passports. For such connection, it is mandatory to provide valid credentials, the name of the TDO, driver name, ...
-(2b) IBM Data Privacy Passports checks in the policy the DbViews section to find the appropriate JDBC connection profile to SQL query the TDO.
-(2c) DBMS sends back SQL query output to IBM Data Privacy Passports as it is (protected data).
-(2d) The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS.
-(2e) IBM Data Privacy Passports via the Passport Controller send back the data (enforced data) to the user.
+* **(1)** User connect to an URL pointing to IBM Data Privacy Passports. For such connection, it is mandatory to provide valid credentials, the name of the TDO, driver name, ... 
+* **(2)** IBM Data Privacy Passports checks in the policy the DbViews section to find the appropriate JDBC connection profile to SQL query the TDO.
+* **(3a)** DBMS sends back SQL query output to IBM Data Privacy Passports as it is (protected data).
+* **(3b)** The Passport Controller directly enforces the data (according to the policy) coming from the source DBMS.
+* **(3c)** IBM Data Privacy Passports via the Passport Controller send back the data (enforced data) to the user.
 
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Protect-then-enforce.png?raw=true)
 
@@ -120,10 +120,10 @@ Expected output is:
 ```
 ```
 
-# 3. Conclusions
+# 3. Conclusions and next steps
 
 You can find below a summary of the different Protection use cases.
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Protection-matrix.png?raw=true)
 
-This close the Data Enforcement chapter. Next chapter in this hands-on labs is [Audit trail](https://github.com/guikarai/IBMDPP/blob/master/audit-trail.md).
+This close the Data Protection chapter. Next chapter in this hands-on labs is [Audit trail](https://github.com/guikarai/IBMDPP/blob/master/audit-trail.md).
 
