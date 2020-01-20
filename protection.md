@@ -37,8 +37,8 @@ You can find below how an IBM Data Privacy Passports administrator creates a TDO
 * **(1e)** The Passport Controller apply then data protection policy to the data, and saved it as a table (this is the TDO) on target DBMS.
 
 You can find below how a JDBC application experiences an SQL Query directly to a TDO.
-* **(3a)** User connect to an URL pointing to a DBMS hosting a TDO, and SQL query it. For such connection, it is mandatory to provide valid credentials, the name of the TDO, driver name, ...
-* **(3b)** DBMS checks provided credentials, and send back SQL query output to user (protected data). The data is still protected. The only way to experience the data in the clear is to send back the TDO to the Passport Controller.
+* **(2a)** User connect to an URL pointing to a DBMS hosting a TDO, and SQL query it. For such connection, it is mandatory to provide valid credentials, the name of the TDO, driver name, ...
+* **(2b)** DBMS checks provided credentials, and send back SQL query output to user (protected data). The data is still protected. The only way to experience the data in the clear is to send back the TDO to the Passport Controller.
 
 **Note:** IBM DPP will must use a valid credentials on target DBMS in order to be able to create the TDO table.
 
