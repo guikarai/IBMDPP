@@ -13,15 +13,15 @@ IBM Data Privacy Passports focuses on data structures and data elements as the â
 You can find below an high level orverview of how a policy is organized:
 
 There are several important sections/blocks in a policy:
-**"Definition structure block"** It helps to define the name of the organization, the validity date of the policy, and its status (Prod, Test, Debug...).
 
-**"Need to know" data element collection"** These are a set of sections that defined what data need to be protected/enforced by a defaut policy, and what expectional rules need to be applied for selected users and business functions.
+* **"Definition structure block"** It helps to define the name of the organization, the validity date of the policy, and its status (Prod, Test, Debug...).
 
-**"Enterprise Functions"** This is a data element collection, to define consistant view of Business Functions, and the relationship with the users.
+* **"Need to know" data element collection"** These are a set of sections that defined what data need to be protected/enforced by a defaut policy, and what expectional rules need to be applied for selected users and business functions.
 
-**"dbViews"** This is data element collection to define how the policy can access to data from external sources (eg. z/OS Db2, AWS Oracle, AWS PostgreSQL, LoZ PostgreSQL, Db2 on Power). This data element collection is key, because it will be use to Enforced data in flight, and to read Trusted Data Objects from the source. Source data remain in the clear and clients connect to IBM Data Privacy Passports as a proxy that will enforce data for them.
-**"Configuration block"** It is about a set of default settings, key stores, ciphers to be used in the policy.
+* **"Enterprise Functions"** This is a data element collection, to define consistant view of Business Functions, and the relationship with the users.
+
+* **"dbViews"** This is data element collection to define how the policy can access to data from external sources (eg. z/OS Db2, AWS Oracle, AWS PostgreSQL, LoZ PostgreSQL, Db2 on Power). This data element collection is key, because it will be use to Enforced data in flight, and to read Trusted Data Objects from the source. Source data remain in the clear and clients connect to IBM Data Privacy Passports as a proxy that will enforce data for them.
+* **"Configuration block"** It is about a set of default settings, key stores, ciphers to be used in the policy.
 
 
 # Policy status
-e
