@@ -2,7 +2,7 @@
 Seen and used in IBM Systems Technical University
 * Upcoming May 25-29	TechU in Amsterdam, Netherlands
 
-![alt-text](https://www.ibm.com/services/learning/images/Amsterdam_2020_event_banner.png?raw=true)
+![alt-text](https://github.com/guikarai/IBMDPP/blob/master/amsterdam-2020-banner.png?raw=true)
 
 # About this Hands-on LAB
 When you will complete this hands-on exploration of IBM Data Privacy Passports, you will understand:
