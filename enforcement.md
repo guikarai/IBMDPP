@@ -45,6 +45,9 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 | 1000004030       | Female  | Courtney    | Castro     | 53   | 320706455  | nathan12@gmail.com          | 553.894.8235         | 9403 Amanda Mission Suite 037, South Johnmouth  | NS         | T1M7N3       |
 | 1000004906       | Male    | Derek       | White      | 34   | 306868178  | youngtracy@garrett.net      | (974) 406-4141 x724  | 1099 Melanie Village, West Meganshire           | NL         | Y6C5T1       |
 +------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+10 rows selected (0.545 seconds)
+Beeline version 1.2.1.spark2 by Apache Hive
+Closing: 0: jdbc:postgresql://10.3.58.109/userdb
 ```
 
 Let's explain a litle bit what has just been done. 
@@ -210,15 +213,36 @@ An IBM Data Privacy Passports admin can create a persisted copy of the customer 
 
 ![alt-text](https://github.com/guikarai/IBMDPP/blob/master/Persisted-enforcement.png?raw=true)
 
-As an enforced copy of the source data, the table "customer_enforced_app1" is self-sufficient. And can be drop anywhere and in any DBMS that can be connected to IBM Data Privacy Passports. The persisted enforced table can be queried directly, and doesn't requires to be accessed via IBM Data Privacy Passports.
+As an enforced copy of the source data, the table "enforced_app1_customer" is self-sufficient. And can be drop anywhere and in any DBMS that can be connected to IBM Data Privacy Passports. The persisted enforced table can be queried directly, and doesn't requires to be accessed via IBM Data Privacy Passports.
 
 
 :computer: Issue the command shown below to query the Persisted Enforced copy of the source DBMS for App1:
 ```
-beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from enforced_customer_app1 limit 10;';
+beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from enforced_app1_customer limit 10;';
 ```
 Expected output is:
 ```
+Connecting to jdbc:postgresql://10.3.58.109/userdb
+Connected to: PostgreSQL (version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1))
+Driver: PostgreSQL JDBC Driver (version 42.2.5)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  | age  |  sin   | email  | phone  | mailing_address  | prov_abbr  |                  postal_code                  |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 39   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | buwRIaAP3ygYyVtnno1X9cGgSDCah43Ozr5d/llpK2M=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 27   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | SK         | bB16k3V1Q9NarsgJxIusJnN6Z+keuTUMt8c6U5AfHDQ=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 44   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | MB         | THhmo4HldLvmSOZS4tbCDFd+WbqaPUgiUgvW0Gd71iM=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 65   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | obg74gIygysS+20cB8RmM+rC0WhvAWMRwA+DAamHQsE=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 62   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | k0cRd0hs2QTl+nMJJyQ+gHDbPfRfmhs8IcVGqD9EKWo=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 57   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | L58jCweVakF8j3fD51fQd1CiYQSVxsKay52egK1KpZI=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 30   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NV         | vD0PSX3dR1BdJHg0TzqkReVB5vfWVo7L0xKSFlWNTu8=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 51   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | YT         | TMvTlNu9u1cr6Oh296Jw5M77K9yxPRjo84ztRSIH0rc=  |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | PTHRFOnirq5VG1S564+/DWq3r/p2/5rmok02UfTenQc=  |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | BiTVRc7IWIhLJ/S0P2XuodNMUCz8vGvvNmgdx7/wesA=  |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
+10 rows selected (0.073 seconds)
+Beeline version 1.2.1.spark2 by Apache Hive
+Closing: 0: jdbc:postgresql://10.3.58.109/userdb
 ```
 
 # 3. Conclusions and next steps
