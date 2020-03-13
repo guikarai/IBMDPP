@@ -22,7 +22,7 @@ You can find below a schema explaining how a JDBC application connects to a DBMS
   
 :computer: Issue the command shown below to query the source DBMS.
 ```
-beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from customer limit 10;';
+beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p myuser -d org.postgresql.Driver -e 'select * from customer limit 10;';
 ```
 Expected output is:
 
@@ -82,26 +82,14 @@ Let's experience the Dynamic Enforcement function of IBM Data Privacy Passports.
 
 :computer: Issue the command shown below to query the source DBMS as a Data Owner (DO):
 ```
-beeline -u 'jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb' -n myuser -p myuser -d org.postgresql.Driver -e 'select * from customer limit 10;';
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n DO -p XXXXX -e "select * from awspostgresql.customer LIMIT 10;"
 ```
 Expected output is:
 
 ```
-:exclamation: Off-course the output looks like the same as before, we are the data owner of this table, so we can see all the data into the clear. But, as you can see also, you just SQL queried IBM Data Privacy Passports and not the source DBMS.
-A first, you just proved that the proxy function of IBM Data Privacy Passports works!
-
-### 1.2.2  SQL query as a Data Administrator (DA):
-Let's experience the Dynamic Enforcement function of IBM Data Privacy Passports again, but this time, let' assume you are the DA (Data Administrator) of the customer table on the target DBMS. As a Data Admnistrator you need administrative access to the data, the table. But it is not on your duties to keep and eye, and to fully understand the content of the customer table. It is a professionnal fault to do it.
-
-:computer: Issue the command shown below to query the source DBMS as a Data Administrator (DA):
-```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n DA -p XXXXX -e "select * from LoZpostgresql.customer LIMIT 10;"
-```
-Expected output is:
-```
-Connecting to jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb
-Connected to: PostgreSQL (version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1))
-Driver: PostgreSQL JDBC Driver (version 42.2.11)
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
 +------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
 | orig_cif_number  | gender  | first_name  | last_name  | age  |    sin     |            email            |        phone         |                 mailing_address                 | prov_abbr  | postal_code  |
@@ -117,9 +105,44 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 | 1000004030       | Female  | Courtney    | Castro     | 53   | 320706455  | nathan12@gmail.com          | 553.894.8235         | 9403 Amanda Mission Suite 037, South Johnmouth  | NS         | T1M7N3       |
 | 1000004906       | Male    | Derek       | White      | 34   | 306868178  | youngtracy@garrett.net      | (974) 406-4141 x724  | 1099 Melanie Village, West Meganshire           | NL         | Y6C5T1       |
 +------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
-10 rows selected (0.236 seconds)
+10 rows selected (0.78 seconds)
 Beeline version 1.2.1 by Apache Hive
-Closing: 0: jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb
+Closing: 0: jdbc:hive2://10.3.58.108:10010
+```
+
+:exclamation: Off-course the output looks like the same as before, we are the data owner of this table, so we can see all the data into the clear. But, as you can see also, you just SQL queried IBM Data Privacy Passports and not the source DBMS.
+A first, you just proved that the proxy function of IBM Data Privacy Passports works!
+
+### 1.2.2  SQL query as a Data Administrator (DA):
+Let's experience the Dynamic Enforcement function of IBM Data Privacy Passports again, but this time, let' assume you are the DA (Data Administrator) of the customer table on the target DBMS. As a Data Admnistrator you need administrative access to the data, the table. But it is not on your duties to keep and eye, and to fully understand the content of the customer table. It is a professionnal fault to do it.
+
+:computer: Issue the command shown below to query the source DBMS as a Data Administrator (DA):
+```
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n DA -p XXXXX -e "select * from awspostgresql.customer LIMIT 10;"
+```
+Expected output is:
+```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+--------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  |  age   |  sin   | email  | phone  | mailing_address  | prov_abbr  | postal_code  |
++------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+--------------+--+
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
++------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+--------------+--+
+10 rows selected (0.709 seconds)
+Beeline version 1.2.1 by Apache Hive
+Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
 :exclamation: What's a big change! You can SQL Query. You can assess there is data. But you can't understand the data, because according to your defined needs to know on the IBM Data Privacy Passport policy, it is stated that **ALL data needs to be enforced** (masking and hashing functions mainly).
 * A first, you just proved that the proxy function of IBM Data Privacy Passports works!
@@ -129,7 +152,7 @@ Closing: 0: jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/u
 ### 1.2.3  SQL query as a Data Consummer (App1):
 :computer: Issue the command shown below to query the source DBMS as a Data Consumer (App1):
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n App1 -p XXXXX -e "select * from LoZpostgresql.customer LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n App1 -p XXXXX -e "select * from awspostgresql.customer LIMIT 10;"
 ```
 Expected output is:
 ```
@@ -137,21 +160,21 @@ Connecting to jdbc:hive2://10.3.58.108:10010
 Connected to: Spark SQL (version 2.2.2)
 Driver: Hive JDBC (version 1.2.1)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
-+------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
-| orig_cif_number  | gender  | first_name  | last_name  | age  |  sin   | email  | phone  | mailing_address  | prov_abbr  |                  postal_code                  |
-+------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 39   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | RB3068INCfpAdZW7FMuvnAJL38cnmBV7KJ1DeXzoB/8=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 27   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | SK         | /9hohT8anKvtSnEyqZfepfzHbDlLFXmdx13ouJaFnSI=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 44   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | MB         | vfQC1ce6F+0zubeqnbDNisHfWgoSDaCojIHsN8colZM=  |
-| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 65   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | RvCxYX0PhlvIsIYoM3g/EBswScg+yWG0HLwwuFB6C5o=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 62   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | fEmD7WR8pkI0J7mv7i3FcebNkUhZYTNDV6Sx0UbTt8U=  |
-| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 57   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | T0NAsoOmvPEzrlS/Se1bAYQIwy7Wef0275+P21Lucu0=  |
-| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 30   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NV         | xUvB2vbFCq1esa15r+AqkwBVx7gmB0aCwm+bVP0f9oo=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 51   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | YT         | +nZnKTz2YQSmrLfswp1EfHGhIuAzkFzrBGNZFdjpJik=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | CNFsalM0lX+Tp126o60COkRHAUKh2QvcbM1E/fY42PU=  |
-| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | ww99SMybNHOPC5QFBS6kwOLxzXk2sYXGw3DCwzACCOU=  |
-+------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
-10 rows selected (0.539 seconds)
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  | age  |  sin   | email  | phone  | mailing_address  | prov_abbr  | postal_code  |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 39   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 27   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | SK         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 44   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | MB         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 65   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 62   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 57   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 30   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NV         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 51   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | YT         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | ZZZZZ        |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
+10 rows selected (0.783 seconds)
 Beeline version 1.2.1 by Apache Hive
 Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
@@ -165,7 +188,7 @@ We sawn with different users that the experience of data is different at the tou
 
 :computer: Issue the command shown below to query the source DBMS as an unknown individual (eg. Test user):
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n Test -p XXXXX -e "select * from LoZpostgresql.customer LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n Test -p XXXXX -e "select * from awspostgresql.customer LIMIT 10;"
 ```
 Expected output is:
 ```
@@ -196,13 +219,13 @@ As an enforced copy of the source data, the table "enforced_app1_customer" is se
 
 :computer: Issue the command shown below to query the Persisted Enforced copy of the source DBMS for App1:
 ```
-beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from enforced_app1_customer limit 10;';
+beeline -u 'jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb' -n myuser -p myuser -d org.postgresql.Driver -e 'select * from enforced_app1_customer limit 10;';
 ```
 Expected output is:
 ```
-Connecting to jdbc:postgresql://10.3.58.109/userdb
+Connecting to jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb
 Connected to: PostgreSQL (version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1))
-Driver: PostgreSQL JDBC Driver (version 42.2.5)
+Driver: PostgreSQL JDBC Driver (version 42.2.11)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
 +------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
 | orig_cif_number  | gender  | first_name  | last_name  | age  |  sin   | email  | phone  | mailing_address  | prov_abbr  |                  postal_code                  |
@@ -218,9 +241,9 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 | XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | PTHRFOnirq5VG1S564+/DWq3r/p2/5rmok02UfTenQc=  |
 | XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | BiTVRc7IWIhLJ/S0P2XuodNMUCz8vGvvNmgdx7/wesA=  |
 +------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
-10 rows selected (0.073 seconds)
-Beeline version 1.2.1.spark2 by Apache Hive
-Closing: 0: jdbc:postgresql://10.3.58.109/userdb
+10 rows selected (0.208 seconds)
+Beeline version 1.2.1 by Apache Hive
+Closing: 0: jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb
 ```
 
 # 3. Conclusions and next steps
