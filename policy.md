@@ -25,27 +25,130 @@ There are several important sections/blocks in a policy:
 * **"Configuration block"** It is about a set of default settings, key stores, ciphers to be used in the policy.
 
 
-# Policy status
-IBM Data Privacy Passports is based on a engine accepting some command lines. One of this command line **"@dp show metrics"** dislayed the latest queries addressed and executed by IBM Data Privacy Passports.
+# Policy status and content
+IBM Data Privacy Passports exposes services via APIs. One of the API can display the content of the policy in use.
 
-:computer: Issue the command shown below to query as an IBM Data Privacy Passports Administrator the query log:
+:computer: Issue the command shown below to query as an IBM Data Privacy Passports Administrator the policy description:
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n DAUser -p XXXXX -e "@dp show metrics";
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n DAUser -p XXXXX -e "@dp describe policy";
 ```
 Expected output is:
 
 ```
-```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++----------------------------------------------------------------------------------------+--+
+|                                         value                                          |
++----------------------------------------------------------------------------------------+--+
+| <DPPolicy>                                                                             |
+|   <org>SC1</org>                                                                       |
+|   <startDate>2019-12-01T00:00:00.000</startDate>                                       |
+|   <endDate>2022-12-01T00:00:00.000</endDate>                                           |
+|   <status>Valid</status>                                                               |
+|   <environment>Demo</environment>                                                      |
+|   <mode>Debug</mode>                                                                   |
+|   <needToKnow>                                                                         |
+|     <dataElements>                                                                     |
+|       <dataElement>                                                                    |
+|         <match>orig_cif_number</match>                                                 |
+|         <defaultScanner>Naive</defaultScanner>                                         |
+|         <defaultProtection>                                                            |
+|           <method>Local</method>                                                       |
+|           <result>Replace</result>                                                     |
+|           <newDataElement>$_DP</newDataElement>                                        |
+|           <metadata></metadata>                                                        |
+|           <parameters>                                                                 |
+|             <keysetname>'demompl'</keysetname>                                         |
+|             <keyname>'mykeyforapp1'</keyname>                                          |
+|           </parameters>                                                                |
+|         </defaultProtection>                                                           |
+|         <defaultEnforcement>                                                           |
+|           <method>Mask</method>                                                        |
+|           <degrade>AcceptPassport</degrade>                                            |
+|           <regex>                                                                      |
+|             <pattern>.</pattern>                                                       |
+|             <replace>X</replace>                                                       |
+|           </regex>                                                                     |
+|         </defaultEnforcement>                                                          |
+|         <consent>false</consent>                                                       |
+|         <enterpriseFunctions>                                                          |
+|           <enterpriseFunction>                                                         |
+|             <targetID>DO</targetID>                                                    |
+|             <enforcement>                                                              |
+|               <method>ClearValue</method>                                              |
+|               <degrade>AcceptPassport</degrade>                                        |
+|             </enforcement>                                                             |
+|           </enterpriseFunction>                                                        |
+|         </enterpriseFunctions>                                                         |
+|       </dataElement>                                                                   |
+|       <dataElement>                                                                    |
+|         <match>gender</match>                                                          |
+|         <defaultScanner>Naive</defaultScanner>                                         |
+|         <defaultProtection>                                                            |
+|           <method>Local</method>                                                       |
+|           <result>Replace</result>                                                     |
+|           <newDataElement>$_DP</newDataElement>                                        |
+|           <metadata></metadata>                                                        |
+|           <parameters>                                                                 |
+|             <keysetname>'demompl'</keysetname>                                         |
+|             <keyname>'mykeyforapp1'</keyname>                                          |
+|           </parameters>                                                                |
+|         </defaultProtection>                                                           |
+|         <defaultEnforcement>                                                           |
+|           <method>ClearValue</method>                                                  |
+|           <degrade>AcceptPassport</degrade>                                            |
+|         </defaultEnforcement>                                                          |
+|         <consent>false</consent>                                                       |
+|         <enterpriseFunctions>                                                          |
+|           <enterpriseFunction>                                                         |
+|             <targetID>DA</targetID>                                                    |
+|             <enforcement>                                                              |
+|               <method>Mask</method>                                                    |
+|               <degrade>AcceptPassport</degrade>                                        |
+|               <regex>                                                                  |
+|                 <pattern>Male</pattern>                                                |
+|                 <replace>XXXXX</replace>                                               |
+|               </regex>                                                                 |
+|               <regex>                                                                  |
+|                 <pattern>Female</pattern>                                              |
+|                 <replace>XXXXX</replace>                                               |
+|               </regex>                                                                 |
+|             </enforcement>                                                             |
+|           </enterpriseFunction>                                                        |
+|         </enterpriseFunctions>                                                         |
+|       </dataElement>                                                                   |
+|       <dataElement>                                                                    |
+|         <match>first_name</match>                                                      |
+|         <defaultScanner>Naive</defaultScanner>                                         |
+|         <defaultProtection>                                                            |
+|           <method>Local</method>                                                       |
+|           <result>Replace</result>                                                     |
+|           <newDataElement>$_DP</newDataElement>                                        |
+|           <metadata></metadata>                                                        |
+|           <parameters>                                                                 |
+|             <keysetname>'demompl'</keysetname>                                         |
+|             <keyname>'mykeyforapp1'</keyname>                                          |
+|           </parameters>                                                                |
+|         </defaultProtection>                                                           |
+|         <defaultEnforcement>                                                           |
+|           <method>Mask</method>                                                        |
+|           <degrade>AcceptPassport</degrade>                                            |
+|           <regex>                                                                      |
+|             <pattern>^.*$</pattern>                                                    |
+|             <replace>XXXXX</replace>                                                   |
+|           </regex>                                                                     |
+|         </defaultEnforcement>                                                          |
+|         <consent>false</consent>                                                       |
+|         <enterpriseFunctions>                                                          |
++----------------------------------------------------------------------------------------+--+
+|                                       TRUNCATED ON PURPOSE                             |
++----------------------------------------------------------------------------------------+--+
 
-IBM Data Privacy Passports is based on a engine accepting some command lines. One of this command line **"@dp show metrics"** dislayed the latest queries addressed and executed by IBM Data Privacy Passports.
-
-:computer: Issue the command shown below to query as an IBM Data Privacy Passports Administrator the query log:
-```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n DAUser -p XXXXX -e "@dp show metrics";
-```
-Expected output is:
-
-```
+629 rows selected (0.246 seconds)
+Beeline version 1.2.1 by Apache Hive
+Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
 
 # Next steps
