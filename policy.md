@@ -26,6 +26,22 @@ There are several important sections/blocks in a policy:
 
 
 # Policy status and content
+
+Now it is time for some hands-on. The whole hands-on lab architecture is based on a docker container infrastructure. Each lab practitioner have his own docker container. The docker container was designed to be used to query and to access IBM Data Privacy Passports services.
+
+Please ask to the hands-on lab instructor about **your port number** and the **password** to be used.
+
+:computer: On Putty, please issue the command below to connect to your lab environment running in a docker container:
+
+```
+ssh -p <your port here> root@10.3.58.109
+```
+    
+:computer: Now, let's position in /. Please issue the following command:
+```
+cd /
+```
+
 IBM Data Privacy Passports exposes services via APIs. One of the API can display the content of the policy in use.
 
 :computer: Issue the command shown below to query as an IBM Data Privacy Passports Administrator the policy description:
