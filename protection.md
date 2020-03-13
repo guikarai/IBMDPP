@@ -53,13 +53,13 @@ You can find below how a JDBC application experiences an SQL Query directly to a
 :computer: Let's experience what data looks like in a TDO:
 
 ```
-beeline -u 'jdbc:postgresql://10.3.58.109/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from protected_app1_customer limit 10;';
+beeline -u 'jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb' -n myuser -p XXXXX -d org.postgresql.Driver -e 'select * from protected_app1_customer limit 10;';
 ```
 Expected output is:
 ```
-Connecting to jdbc:postgresql://10.3.58.109/userdb
+Connecting to jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb
 Connected to: PostgreSQL (version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1))
-Driver: PostgreSQL JDBC Driver (version 42.2.5)
+Driver: PostgreSQL JDBC Driver (version 42.2.11)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
 +-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+--+
 |                                           orig_cif_number                                           |                                      gender                                       |                                      first_name                                       |                                      last_name                                       |                                          age                                           |                                           sin                                           |                                                email                                                 |                                                phone                                                 |                                                                      mailing_address                                                                       |                                      prov_abbr                                       |                                      postal_code                                       |
@@ -75,9 +75,9 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 | ##P1L{"#K":"demompl.mykeyforapp1","#D":{"cqrUF5IMvQZ3IEMYoqrXDQ==":"Long"},"#A":"orig_cif_number"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"aZMTWQaxn37v0EI6iyJQqA==","#A":"gender"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"fQq3teeXJHZf3zgVqj3UJg==","#A":"first_name"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"TnIhmNTjTJ0GA3PsjAev4Q==","#A":"last_name"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":{"KMWor7Q7LJvi12l0ttb+zA==":"Int"},"#A":"age"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":{"0zEBoKmqh9t4RcbDItZ+Sg==":"Long"},"#A":"sin"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"L6vCwdWirVjyi/XtiJUM4CyR0qgSoEe676EIrLLY1CM=","#A":"email"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"cOoH1rRzJ63F4OZNI+VyBQ==","#A":"phone"}                      | ##P1L{"#K":"demompl.mykeyforapp1","#D":"J3efK9tbYsiuUyfHl23Q+ya3qEtOrJea6QlMrGB+/kNZszPmbpWr5/eOEnvZKcc2gdN05Rc/XzSaLR/0Gq/7Rg==","#A":"mailing_address"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"/G+DpfOfzRXMBLDBur8+FA==","#A":"prov_abbr"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"zrUZIqXAVjcbKd3iKqMw/Q==","#A":"postal_code"}  |
 | ##P1L{"#K":"demompl.mykeyforapp1","#D":{"mDuPPnvsse+3mzMblAIi/Q==":"Long"},"#A":"orig_cif_number"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"Vrk2zoEITE+p0kK7PBSn1Q==","#A":"gender"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"9bkxzP50VexFgoAzC4eRuw==","#A":"first_name"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"xU3s/l+D6HNWTYA5A08ecA==","#A":"last_name"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":{"Z2WpxcCoanwaPzXUwaOkdQ==":"Int"},"#A":"age"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":{"tTwiMDBJy1TP79jeZ1b/eg==":"Long"},"#A":"sin"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"gCMiW8H4PEDrOmWO6tchkV/BiiOcqZzaJUwgjDuVpIU=","#A":"email"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"xf0qPj39r93AuoG+UUF+LkLsIcvBZCdrVv1GO/nA9dc=","#A":"phone"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"lXp27MzjIoK3DEx66BnAAWWvbrRGEYmPWzAXySKE11p9r2VP60ToWPWtRPnQU+/C","#A":"mailing_address"}                          | ##P1L{"#K":"demompl.mykeyforapp1","#D":"AtwXZWcLb+Mot/gWC9qPmw==","#A":"prov_abbr"}  | ##P1L{"#K":"demompl.mykeyforapp1","#D":"Z5EaEsNxd6ChF5Mx+KvHMw==","#A":"postal_code"}  |
 +-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+--+
-10 rows selected (0.142 seconds)
-Beeline version 1.2.1.spark2 by Apache Hive
-Closing: 0: jdbc:postgresql://10.3.58.109/userdb
+10 rows selected (0.202 seconds)
+Beeline version 1.2.1 by Apache Hive
+Closing: 0: jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb
 ```
 :exclamation: Off-course we can't understand anything, we just query a TDO directly. What we see is security mecanism and the data together. As a TDO, data is secured no matter where it is, and no matter the security of environment the data is crossing.
 
@@ -102,10 +102,31 @@ Let's SQL query a TDO via IBM Data Privacy Passports with different users.
 :computer: Let's experience what data looks like in a TDO:
 
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n DO -p XXXXX -e "select * from AWSpostgresql.protected_app1_customer LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n DO -p XXXXX -e "select * from awspostgresql.protected_app1_customer LIMIT 10;"
 ```
 Expected output is:
 ```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  | age  |    sin     |            email            |        phone         |                 mailing_address                 | prov_abbr  | postal_code  |
++------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+| 1000016268       | Female  | Madeline    | Campbell   | 39   | 346108285  | carrolljoseph@hill.com      | 1-394-776-2104       | 0649 Ann Greens, Edwardton                      | AB         | R9V7G8       |
+| 1000012605       | Female  | Lynn        | Scott      | 27   | 978982456  | janet64@hotmail.com         | (749) 623-9781       | 9800 Tina Crescent, North Alexandraton          | SK         | R2A5R8       |
+| 1000012979       | Female  | Lauren      | Arroyo     | 44   | 809852991  | scottwilson@foster.info     | 1-818-222-2486       | 065 Russell Dam Apt. 235, Newtonstad            | MB         | V6T 3Y3      |
+| 1000001690       | Male    | Anthony     | Mendoza    | 65   | 210726574  | cgarcia@simpson-howard.com  | 589-767-7808         | 1803 Roberson Spur, New Krista                  | AB         | L4B1A4       |
+| 1000011265       | Female  | Kimberly    | Quinn      | 62   | 262697551  | hendersonjames@price.biz    | 670 392 0575         | 638 Crystal Track, Port Stacy                   | AB         | P7B1C7       |
+| 1000014413       | Male    | Michael     | Carter     | 57   | 467383604  | ryan84@hotmail.com          | (373) 822-1521       | 48321 Bailey Glens, Port Carlos                 | NS         | Y3M6L7       |
+| 1000001944       | Male    | Allen       | Hernandez  | 30   | 908758262  | thomas70@ferguson.com       | (539) 376-1754 x502  | 467 Holland Forest Suite 332, Thompsonville     | NV         | Y3L 9E2      |
+| 1000002939       | Female  | Alyssa      | Dunn       | 51   | 834736228  | cheryl06@hotmail.com        | (434) 546-5030 x237  | 0819 Mathew Inlet Suite 107, Lauraview          | YT         | K9J 4V6      |
+| 1000004030       | Female  | Courtney    | Castro     | 53   | 320706455  | nathan12@gmail.com          | 553.894.8235         | 9403 Amanda Mission Suite 037, South Johnmouth  | NS         | T1M7N3       |
+| 1000004906       | Male    | Derek       | White      | 34   | 306868178  | youngtracy@garrett.net      | (974) 406-4141 x724  | 1099 Melanie Village, West Meganshire           | NL         | Y6C5T1       |
++------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
+10 rows selected (12.989 seconds)
+Beeline version 1.2.1 by Apache Hive
+Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
 
 ### 2.2 SQL query as a Data Administrator (DA) of a TDO via IBM Data Privacy Passports:
@@ -113,10 +134,31 @@ Expected output is:
 :computer: Let's experience what data looks like in a TDO:
 
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n DA -p XXXXX -e "select * from AWSpostgresql.protected_customer_App1 LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n DA -p XXXXX -e "select * from awspostgresql.protected_customer_App1 LIMIT 10;"
 ```
 Expected output is:
 ```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+--------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  |  age   |  sin   | email  | phone  | mailing_address  | prov_abbr  | postal_code  |
++------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+--------------+--+
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
+| XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
++------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+--------------+--+
+10 rows selected (12.232 seconds)
+Beeline version 1.2.1 by Apache Hive
+Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
 
 ### 2.3 SQL query as a Data Consummer (App1) of a TDO via IBM Data Privacy Passports:
@@ -124,10 +166,31 @@ Expected output is:
 :computer: Let's experience what data looks like in a TDO:
 
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n App1 -p XXXXX -e "select * from AWSpostgresql.protected_customer_App1 LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n App1 -p XXXXX -e "select * from awspostgresql.protected_app1_customer LIMIT 10;"
 ```
 Expected output is:
 ```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  | age  |  sin   | email  | phone  | mailing_address  | prov_abbr  | postal_code  |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 39   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 27   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | SK         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 44   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | MB         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 65   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 62   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 57   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 30   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NV         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 51   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | YT         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | ZZZZZ        |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
+10 rows selected (12.079 seconds)
+Beeline version 1.2.1 by Apache Hive
+Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
 
 ### 2.4 SQL query as an unknow user (Test) of a TDO via IBM Data Privacy Passports:
@@ -135,10 +198,16 @@ Expected output is:
 :computer: Let's experience what data looks like in a TDO:
 
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n Test -p XXXXX -e "select * from AWSpostgresql.protected_customer_App1 LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.108:10010" -n Test -p XXXXX -e "select * from awspostgresql.protected_app1_customer LIMIT 10;"
 ```
 Expected output is:
 ```
+Connecting to jdbc:hive2://10.3.58.108:10010
+Connected to: Spark SQL (version 2.2.2)
+Driver: Hive JDBC (version 1.2.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+Error: com.schedule1.datapassports.UnknownFunctionException: DP-0: unknown target '[TARGET_MISSING]' (state=,code=0)
+Closing: 0: jdbc:hive2://10.3.58.108:10010
 ```
 
 # 3. Conclusions and next steps
