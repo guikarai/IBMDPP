@@ -82,13 +82,13 @@ Let's experience the Dynamic Enforcement function of IBM Data Privacy Passports.
 
 :computer: Issue the command shown below to query the source DBMS as a Data Owner (DO):
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n DO -p XXXXX -e "select * from awspostgresql.customer LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.20:10010" -n DOUser -p DOUser -e "select * from awspostgresql.customer LIMIT 10;"
 ```
 Expected output is:
 
 ```
-Connecting to jdbc:hive2://10.3.58.108:10010
-Connected to: Spark SQL (version 2.2.2)
+Connecting to jdbc:hive2://10.3.58.20:10010
+Connected to: Spark SQL (version 2.4.4)
 Driver: Hive JDBC (version 1.2.1)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
 +------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
@@ -105,9 +105,9 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 | 1000004030       | Female  | Courtney    | Castro     | 53   | 320706455  | nathan12@gmail.com          | 553.894.8235         | 9403 Amanda Mission Suite 037, South Johnmouth  | NS         | T1M7N3       |
 | 1000004906       | Male    | Derek       | White      | 34   | 306868178  | youngtracy@garrett.net      | (974) 406-4141 x724  | 1099 Melanie Village, West Meganshire           | NL         | Y6C5T1       |
 +------------------+---------+-------------+------------+------+------------+-----------------------------+----------------------+-------------------------------------------------+------------+--------------+--+
-10 rows selected (0.78 seconds)
+10 rows selected (3.862 seconds)
 Beeline version 1.2.1 by Apache Hive
-Closing: 0: jdbc:hive2://10.3.58.108:10010
+Closing: 0: jdbc:hive2://10.3.58.20:10010
 ```
 
 :exclamation: Off-course the output looks like the same as before, we are the data owner of this table, so we can see all the data into the clear. But, as you can see also, you just SQL queried IBM Data Privacy Passports and not the source DBMS.
@@ -118,12 +118,12 @@ Let's experience the Dynamic Enforcement function of IBM Data Privacy Passports 
 
 :computer: Issue the command shown below to query the source DBMS as a Data Administrator (DA):
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n DA -p XXXXX -e "select * from awspostgresql.customer LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.20:10010" -n DAUser -p DAUser -e "select * from awspostgresql.customer LIMIT 10;"
 ```
 Expected output is:
 ```
-Connecting to jdbc:hive2://10.3.58.108:10010
-Connected to: Spark SQL (version 2.2.2)
+Connecting to jdbc:hive2://10.3.58.20:10010
+Connected to: Spark SQL (version 2.4.4)
 Driver: Hive JDBC (version 1.2.1)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
 +------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+--------------+--+
@@ -140,9 +140,9 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 | XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
 | XXXXXXXXXX       | XXXXX   | XXXXX       | XXXXX      | XXXXX  | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | XXXXX      | ZZZZZ        |
 +------------------+---------+-------------+------------+--------+--------+--------+--------+------------------+------------+--------------+--+
-10 rows selected (0.709 seconds)
+10 rows selected (4.505 seconds)
 Beeline version 1.2.1 by Apache Hive
-Closing: 0: jdbc:hive2://10.3.58.108:10010
+Closing: 0: jdbc:hive2://10.3.58.20:10010
 ```
 :exclamation: What's a big change! You can SQL Query. You can assess there is data. But you can't understand the data, because according to your defined needs to know on the IBM Data Privacy Passport policy, it is stated that **ALL data needs to be enforced** (masking and hashing functions mainly).
 * A first, you just proved that the proxy function of IBM Data Privacy Passports works!
@@ -152,12 +152,12 @@ Closing: 0: jdbc:hive2://10.3.58.108:10010
 ### 1.2.3  SQL query as a Data Consummer (App1):
 :computer: Issue the command shown below to query the source DBMS as a Data Consumer (App1):
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n App1 -p XXXXX -e "select * from awspostgresql.customer LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.20:10010" -n App1User -p App1User -e "select * from awspostgresql.customer LIMIT 10;"
 ```
 Expected output is:
 ```
-Connecting to jdbc:hive2://10.3.58.108:10010
-Connected to: Spark SQL (version 2.2.2)
+Connecting to jdbc:hive2://10.3.58.20:10010
+Connected to: Spark SQL (version 2.4.4)
 Driver: Hive JDBC (version 1.2.1)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
 +------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
@@ -174,9 +174,9 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 | XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | ZZZZZ        |
 | XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | ZZZZZ        |
 +------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
-10 rows selected (0.783 seconds)
+10 rows selected (4.479 seconds)
 Beeline version 1.2.1 by Apache Hive
-Closing: 0: jdbc:hive2://10.3.58.108:10010
+Closing: 0: jdbc:hive2://10.3.58.20:10010
 ```
 :exclamation: Another interresting change! You can SQL Query. You can assess there is data. But you can't understand some data, because according to your defined needs to know on the IBM Data Privacy Passport policy, it is stated that **several data needs to be enforced** (masking and hashing functions mainly) except (gender, age, prov_abbr).
 * A first, you just proved that the proxy function of IBM Data Privacy Passports works!
@@ -188,16 +188,14 @@ We sawn with different users that the experience of data is different at the tou
 
 :computer: Issue the command shown below to query the source DBMS as an unknown individual (eg. Test user):
 ```
-beeline -u "jdbc:hive2://10.3.58.108:10010" -n Test -p XXXXX -e "select * from awspostgresql.customer LIMIT 10;"
+beeline -u "jdbc:hive2://10.3.58.20:10010" -n Test -p Test -e "select * from awspostgresql.customer LIMIT 10;"
 ```
 Expected output is:
 ```
-Connecting to jdbc:hive2://10.3.58.108:10010
-Connected to: Spark SQL (version 2.2.2)
-Driver: Hive JDBC (version 1.2.1)
-Transaction isolation: TRANSACTION_REPEATABLE_READ
-Error: com.schedule1.datapassports.UnknownFunctionException: DP-0: unknown target '[TARGET_MISSING]' (state=,code=0)
-Closing: 0: jdbc:hive2://10.3.58.108:10010
+Connecting to jdbc:hive2://10.3.58.20:10010
+Error: Could not open client transport with JDBC Uri: jdbc:hive2://10.3.58.20:10010: Peer indicated failure: Error validating the login (state=08S01,code=0)
+No current connection
+Error: Could not open client transport with JDBC Uri: jdbc:hive2://10.3.58.20:10010: Peer indicated failure: Error validating the login (state=08S01,code=0)
 ```
 :exclamation: Very interresting results! You can't SQL Query at all. The user being unknown from IBM Data Privacy Passports, IBM Data Privacy Passports will not execute the SQL query to the DBMS.
 
@@ -225,23 +223,23 @@ Expected output is:
 ```
 Connecting to jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb
 Connected to: PostgreSQL (version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1))
-Driver: PostgreSQL JDBC Driver (version 42.2.11)
+Driver: Hive JDBC (version 1.2.1)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
-+------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
-| orig_cif_number  | gender  | first_name  | last_name  | age  |  sin   | email  | phone  | mailing_address  | prov_abbr  |                  postal_code                  |
-+------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 39   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | buwRIaAP3ygYyVtnno1X9cGgSDCah43Ozr5d/llpK2M=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 27   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | SK         | bB16k3V1Q9NarsgJxIusJnN6Z+keuTUMt8c6U5AfHDQ=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 44   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | MB         | THhmo4HldLvmSOZS4tbCDFd+WbqaPUgiUgvW0Gd71iM=  |
-| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 65   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | obg74gIygysS+20cB8RmM+rC0WhvAWMRwA+DAamHQsE=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 62   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | k0cRd0hs2QTl+nMJJyQ+gHDbPfRfmhs8IcVGqD9EKWo=  |
-| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 57   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | L58jCweVakF8j3fD51fQd1CiYQSVxsKay52egK1KpZI=  |
-| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 30   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NV         | vD0PSX3dR1BdJHg0TzqkReVB5vfWVo7L0xKSFlWNTu8=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 51   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | YT         | TMvTlNu9u1cr6Oh296Jw5M77K9yxPRjo84ztRSIH0rc=  |
-| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | PTHRFOnirq5VG1S564+/DWq3r/p2/5rmok02UfTenQc=  |
-| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | BiTVRc7IWIhLJ/S0P2XuodNMUCz8vGvvNmgdx7/wesA=  |
-+------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+-----------------------------------------------+--+
-10 rows selected (0.208 seconds)
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
+| orig_cif_number  | gender  | first_name  | last_name  | age  |  sin   | email  | phone  | mailing_address  | prov_abbr  | postal_code  |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 39   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 27   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | SK         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 44   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | MB         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 65   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 62   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | AB         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 57   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 30   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NV         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 51   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | YT         | ZZZZZ        |
+| XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | ZZZZZ        |
+| XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | ZZZZZ        |
++------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
+10 rows selected (4.479 seconds)
 Beeline version 1.2.1 by Apache Hive
 Closing: 0: jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb
 ```
