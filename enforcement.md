@@ -239,7 +239,7 @@ Transaction isolation: TRANSACTION_REPEATABLE_READ
 | XXXXXXXXXX       | Female  | XXXXX       | XXXXX      | 53   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NS         | ZZZZZ        |
 | XXXXXXXXXX       | Male    | XXXXX       | XXXXX      | 34   | 99999  | XXXXX  | 99999  | XXXXX@XXXXX      | NL         | ZZZZZ        |
 +------------------+---------+-------------+------------+------+--------+--------+--------+------------------+------------+--------------+--+
-10 rows selected (4.479 seconds)
+10 rows selected (1.749 seconds)
 Beeline version 1.2.1 by Apache Hive
 Closing: 0: jdbc:postgresql://ec2-35-180-97-38.eu-west-3.compute.amazonaws.com/userdb
 ```
