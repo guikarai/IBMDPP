@@ -9,9 +9,9 @@ Moreover, IBM Data Privacy Passports is admnistrated by Admin users in charge of
 * co-signing a policy
 * deploying a policy
 
-Such activities needs to be logged acurrately for both security and compliance reasons. Let's access to some audit logs.
+Such activities needs to be logged acurrately for both security and compliance reasons. Let's access to some audit logs. There are APIs provinding also diagnostic information about IBM Data Privacy Passport providing you usefull insights.
 
-There are API's provinding also diagnostic information about IBM Data Privacy Passport providing you usefull insights.
+The following section is available via SLS Lab Services workshop! Are you interested?
 
 ## AUDIT
 
