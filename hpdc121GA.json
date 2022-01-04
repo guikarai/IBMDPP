@@ -1,0 +1,2968 @@
+openapi: 3.0.0
+info:
+  title: IBM Hyper Protect Data Controller
+  description: IBM Hyper Protect Data Controller REST API.
+  license:
+    name: IBM International Program License Agreement (IPLA)
+    url: https://www-03.ibm.com/software/sla/sladb.nsf/sla/bla
+  version: 1.2.1
+tags:
+- name: register
+  description: Register to Hyper Protect Data Controller.
+- name: status
+  description: Retrieve status of Hyper Protect Data Controller request.
+- name: policies
+  description: Perform operations on Hyper Protect Data Controller policies.
+- name: key
+  description: Create and manage keys.
+- name: password
+  description: Create and manage passwords.
+- name: backups
+  description: Manage Backup and Restore functionality.
+- name: diagnostics
+  description: Get diagnostic information from Hyper Protect Data Controller.
+- name: admin/jdbc_jars
+  description: Administrative jar file management operations.
+- name: admin/logs
+  description: Administrative log file management operations.
+- name: admin/keystores/TLS
+  description: Administrative keystore management operations.
+- name: admin/config
+  description: Administrative keystore configuration operations.
+- name: admin/custom
+  description: Administrative custom configuration file operations.
+- name: admin/audit
+  description: Administrative audit file operations.
+- name: admin/hwcrypto/rewrap
+  description: Administrative hardware crypto operations.
+paths:
+  /admin/policies/{filename}:
+    get:
+      tags:
+      - admin/policies
+      summary: Download a policy.
+      operationId: admin-get-policy
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - admin/policies
+      summary: Delete existing policy.
+      operationId: admin-policy-delete
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/policies:
+    get:
+      tags:
+      - admin/policies
+      summary: Get list of policies.
+      operationId: admin-get-policies
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - admin/policies
+      summary: Upload a policy file.
+      operationId: admin-upload-policy
+      responses:
+        "201":
+          description: Created.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/audit:
+    get:
+      tags:
+      - admin/audit
+      summary: Get tar of audit logs.
+      operationId: get-audit
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/config:
+    get:
+      tags:
+      - admin/config
+      summary: Get config properties.
+      operationId: get-all-config
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - admin/config
+      summary: Upload a configuration setting.
+      operationId: upload-config
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+      responses:
+        "201":
+          description: Created.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/config/{key}:
+    get:
+      tags:
+      - admin/config
+      summary: Get a config property value.
+      operationId: get-config
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/custom/{path}:
+    get:
+      tags:
+      - admin/custom
+      summary: Get list of custom config files.
+      operationId: get-custom-files
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - admin/custom
+      summary: Upload a custom config file.
+      operationId: upload-custom
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "201":
+          description: Created.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/custom/{path}/{filename}:
+    get:
+      tags:
+      - admin/custom
+      summary: Download a custom config file.
+      operationId: get-custom
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - admin/custom
+      summary: Delete existing custom file.
+      operationId: custom-delete
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/jdbc_jars:
+    get:
+      tags:
+      - admin/jdbc_jars
+      summary: Get list of jar files.
+      operationId: get-jar
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - admin/jdbc_jars
+      summary: Upload a jar file.
+      operationId: upload-jar
+      responses:
+        "201":
+          description: Created.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/jdbc_jars/{filename}:
+    delete:
+      tags:
+      - admin/jdbc_jars
+      summary: Delete existing jar file.
+      operationId: jar-delete
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/keystores/TLS:
+    get:
+      tags:
+      - admin/keystores/TLS
+      summary: Get list of keystores.
+      operationId: get-keystores
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - admin/keystores/TLS
+      summary: Upload a keystore file.
+      operationId: upload-keystore
+      responses:
+        "201":
+          description: Created.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/keystores/TLS/{filename}:
+    get:
+      tags:
+      - admin/keystores/TLS
+      summary: Get keystore details.
+      operationId: get-keystore
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - admin/keystores/TLS
+      summary: Delete existing keystore.
+      operationId: keystore-delete
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/logger/TLS:
+    get:
+      tags:
+      - admin/logger/TLS
+      summary: Get list of logger certificates.
+      operationId: get-logger-tls_1
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - admin/logger/TLS
+      summary: Upload a logger certificate.
+      operationId: upload-logger-tls
+      responses:
+        "201":
+          description: Created.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/logger/TLS/{filename}:
+    get:
+      tags:
+      - admin/logger/TLS
+      summary: Get logger certificate details.
+      operationId: get-logger-tls
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - admin/logger/TLS
+      summary: Delete existing logger certificate.
+      operationId: logger-tls-delete
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/logs/{path}/{filename}:
+    get:
+      tags:
+      - admin/logs
+      summary: Download a log file.
+      operationId: get-log-path
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - admin/logs
+      summary: Delete existing log file.
+      operationId: logs-delete-path
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/logs/{path}/{subpath}/{filename}:
+    get:
+      tags:
+      - admin/logs
+      summary: Download a log file.
+      operationId: get-log-path-extended
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subpath
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - admin/logs
+      summary: Delete existing log file.
+      operationId: logs-delete-path-extended
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subpath
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/logs/{path}/{subpath}/{subpath2}/{filename}:
+    get:
+      tags:
+      - admin/logs
+      summary: Download a log file.
+      operationId: get-log-path-extended-2
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subpath
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subpath2
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - admin/logs
+      summary: Delete existing log file.
+      operationId: logs-delete-path-extended-2
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subpath
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subpath2
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/logs/{filename}:
+    get:
+      tags:
+      - admin/logs
+      summary: Download a log file.
+      operationId: get-log
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - admin/logs
+      summary: Delete existing log file.
+      operationId: logs-delete
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/logs:
+    get:
+      tags:
+      - admin/logs
+      summary: Get list of logs.
+      operationId: get-logs
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /openapi:
+    get:
+      operationId: getOpenapi
+      responses:
+        default:
+          description: default response
+  /backups/{backupName}/restore:
+    post:
+      tags:
+      - backups
+      description: Restore a backup by name.
+      operationId: backups-restoreBackupByName
+      parameters:
+      - name: backupName
+        in: path
+        description: Name of the backup to restore.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadBackupRestore'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /backups:
+    get:
+      tags:
+      - backups
+      summary: Get list of backup files.
+      operationId: get-backups
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - backups
+      summary: Upload a backup file.
+      operationId: upload-backup
+      responses:
+        "201":
+          description: Created.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /backups/{backupName}:
+    get:
+      tags:
+      - backups
+      summary: Download a backup file.
+      operationId: get-backup
+      parameters:
+      - name: backupName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - backups
+      summary: Delete existing backup file.
+      operationId: backup-delete
+      parameters:
+      - name: backupName
+        in: path
+        description: Name of the backup to delete.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/hwcrypto/ep11tked/start:
+    get:
+      tags:
+      - admin/hwcrypto
+      summary: Starts the ep11TKEd process.
+      operationId: ep11tked-start
+      responses:
+        "200":
+          description: Success.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/hwcrypto/ep11tked:
+    get:
+      tags:
+      - admin/hwcrypto
+      summary: Get the status of the ep11TKEd process
+      operationId: ep11tked-status
+      responses:
+        "200":
+          description: Success.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/hwcrypto/rewrap:
+    get:
+      tags:
+      - admin/hwcrypto
+      summary: Rewrap EP11 secure keys.
+      operationId: rewrap-keys
+      responses:
+        "200":
+          description: Success.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /admin/hwcrypto/ep11tked/stop:
+    get:
+      tags:
+      - admin/hwcrypto
+      summary: Stops the ep11TKEd process.
+      operationId: ep11tked-stop
+      responses:
+        "200":
+          description: Success.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /diagnostics/activepolicy:
+    get:
+      tags:
+      - diagnostics
+      description: Returns active policy information.
+      operationId: policy-showPolicy
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /diagnostics/version:
+    get:
+      tags:
+      - diagnostics
+      description: Returns version information.
+      operationId: diagnostics-version
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /diagnostics/dbview:
+    get:
+      tags:
+      - diagnostics
+      description: Returns current dbView information.
+      operationId: diagnostics-dbview
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /diagnostics/viewsession:
+    get:
+      tags:
+      - diagnostics
+      description: Returns Hyper Protect Data Controller  user session information.
+      operationId: diagnostics-viewsession
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /key/{keySetName}/{keyName}:
+    get:
+      tags:
+      - key
+      description: Displays information about a key.
+      operationId: key-findByKeySetNameAndKeyName
+      parameters:
+      - name: keySetName
+        in: path
+        description: Name of Hyper Protect Data Controller key set.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      - name: keyName
+        in: path
+        description: Name of Hyper Protect Data Controller key.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - key
+      description: Creates a new key.
+      operationId: key-createByKeySetNameAndKeyName
+      parameters:
+      - name: keySetName
+        in: path
+        description: Name of Hyper Protect Data Controller key set.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      - name: keyName
+        in: path
+        description: Name of Hyper Protect Data Controller key.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadKeysCreateByKeySetNameAndKeyName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - key
+      description: Deletes a key.
+      operationId: key-deleteByKeySetNameAndKeyName
+      parameters:
+      - name: keySetName
+        in: path
+        description: Name of Hyper Protect Data Controller key set.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      - name: keyName
+        in: path
+        description: Name of Hyper Protect Data Controller key.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /key:
+    get:
+      tags:
+      - key
+      description: Get all keys.
+      operationId: key-findAll
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /keys/{keySetName}/{keyName}:
+    get:
+      tags:
+      - keys
+      description: Displays information about a key.
+      operationId: keys-findByKeySetNameAndKeyName
+      parameters:
+      - name: keySetName
+        in: path
+        description: Name of Hyper Protect Data Controller key set.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      - name: keyName
+        in: path
+        description: Name of Hyper Protect Data Controller key.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - keys
+      description: Creates a new key.
+      operationId: keys-createByKeySetNameAndKeyName
+      parameters:
+      - name: keySetName
+        in: path
+        description: Name of Hyper Protect Data Controller  key set.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      - name: keyName
+        in: path
+        description: Name of Hyper Protect Data Controller  key.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadKeysCreateByKeySetNameAndKeyName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - keys
+      description: Deletes a key.
+      operationId: keys-deleteByKeySetNameAndKeyName
+      parameters:
+      - name: keySetName
+        in: path
+        description: Name of Hyper Protect Data Controller key set.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      - name: keyName
+        in: path
+        description: Name of Hyper Protect Data Controller key.
+        required: true
+        schema:
+          pattern: "^[a-z_\\-0-9]+$"
+          type: string
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /keys:
+    get:
+      tags:
+      - keys
+      description: Get all keys.
+      operationId: keys-findAll
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /password/{passwordName}:
+    get:
+      tags:
+      - password
+      description: Displays information about a password.
+      operationId: password-findByPasswordName
+      parameters:
+      - name: passwordName
+        in: path
+        description: Name of Hyper Protect Data Controller password.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - password
+      description: Creates a password handle for a provided password.
+      operationId: password-createByPasswordName
+      parameters:
+      - name: passwordName
+        in: path
+        description: Handle of Hyper Protect Data Controller password.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPasswordsCreateByPasswordName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - password
+      description: Deletes a password.
+      operationId: password-deleteByPasswordName
+      parameters:
+      - name: passwordName
+        in: path
+        description: Handle of Hyper Protect Data Controller password.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /password:
+    get:
+      tags:
+      - password
+      description: Get all passwords.
+      operationId: password-findAll
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /passwords/{passwordName}:
+    get:
+      tags:
+      - passwords
+      description: Displays information about a password.
+      operationId: passwords-findByPasswordName
+      parameters:
+      - name: passwordName
+        in: path
+        description: Name of Hyper Protect Data Controller password.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - passwords
+      description: Creates a password handle for a provided password.
+      operationId: passwords-createByPasswordName
+      parameters:
+      - name: passwordName
+        in: path
+        description: Handle of Hyper Protect Data Controller password.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPasswordsCreateByPasswordName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - passwords
+      description: Deletes a password.
+      operationId: passwords-deleteByPasswordName
+      parameters:
+      - name: passwordName
+        in: path
+        description: Handle of Hyper Protect Data Controller password.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /passwords:
+    get:
+      tags:
+      - passwords
+      description: Get all passwords.
+      operationId: passwords-findAll
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/connections/{connectionName}/tables/{sourceTable}/apply:
+    put:
+      tags:
+      - policies
+      description: "Takes a source table belonging to a connection specified in the\
+        \ active policy, and applies the active policy to it creating a new table."
+      operationId: policies-applyPolicyByConnectionNameAndTableName
+      parameters:
+      - name: connectionName
+        in: path
+        description: Name of a connection declared in the active policy or `default`
+          is using the default connection.
+        required: true
+        schema:
+          type: string
+      - name: sourceTable
+        in: path
+        description: Source table in specified connection on which policy will be
+          applied.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPoliciesApplyPolicyByConnectionNameAndTableName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/{policyName}/start:
+    post:
+      tags:
+      - policies
+      description: Starts a policy.
+      operationId: policies-startByPolicyName
+      parameters:
+      - name: policyName
+        in: path
+        description: Name of Hyper Protect Data Controller policy handle.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPoliciesStartByPolicyName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/{policyName}/sign:
+    post:
+      tags:
+      - policies
+      description: Signs a policy.
+      operationId: policies-signByPolicyName
+      parameters:
+      - name: policyName
+        in: path
+        description: Name of Hyper Protect Data Controller policy handle.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPoliciesSignByPolicyName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/{policyName}/activate:
+    post:
+      tags:
+      - policies
+      description: Starts a policy.
+      operationId: policies-startByPolicyName_1
+      parameters:
+      - name: policyName
+        in: path
+        description: Name of Hyper Protect Data Controller policy handle.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPoliciesStartByPolicyName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/apply:
+    post:
+      tags:
+      - policies
+      description: Protects or enforces data.
+      operationId: protect
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPoliciesApply'
+        required: true
+      responses:
+        "200":
+          description: Ok.
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/{policyName}:
+    get:
+      tags:
+      - policies
+      summary: Download a policy.
+      operationId: get-policy
+      parameters:
+      - name: policyName
+        in: path
+        description: Name of Hyper Protect Data Controller policy handle.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - policies
+      summary: Delete existing policy.
+      operationId: policy-delete
+      parameters:
+      - name: policyName
+        in: path
+        description: Name of Hyper Protect Data Controller policy handle.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      responses:
+        "204":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/{policyName}/approve:
+    post:
+      tags:
+      - policies
+      description: Signs a policy.
+      operationId: policies-signByPolicyName_1
+      parameters:
+      - name: policyName
+        in: path
+        description: Name of Hyper Protect Data Controller policy handle.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPoliciesSignByPolicyName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/draft:
+    get:
+      tags:
+      - policies
+      summary: Get list of policies.
+      operationId: get-policies-draft-true
+      parameters:
+      - name: draft
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies:
+    get:
+      tags:
+      - policies
+      summary: Get list of policies.
+      operationId: get-policies
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    post:
+      tags:
+      - policies
+      summary: Upload a policy file.
+      operationId: upload-policy
+      responses:
+        "201":
+          description: Created.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/disable:
+    post:
+      tags:
+      - policies
+      description: Disables the current Hyper Protect Data Controller policy and prevents
+        further requests.
+      operationId: policies-disable
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/connections/{connectionName}/tables/{sourceTable}/describe:
+    get:
+      tags:
+      - policies
+      description: Takes a source table belonging to a connection specified in the
+        active policy and describes a potential output table schema.
+      operationId: policies-describePolicyByConnectionNameAndTableName
+      parameters:
+      - name: connectionName
+        in: path
+        description: Name of a connection declared in the active policy or `default`
+          is using the default connection.
+        required: true
+        schema:
+          type: string
+      - name: sourceTable
+        in: path
+        description: Source table in specified connection on which policy will be
+          applied.
+        required: true
+        schema:
+          type: string
+      - name: targetPersona
+        in: query
+        description: Persona target to use for simulating output schemas.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not Found.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policies/reset:
+    post:
+      tags:
+      - policies
+      description: Resets Hyper Protect Data Controller to its original installed
+        state.
+      operationId: policies-reset
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policy/{policyName}/start:
+    post:
+      tags:
+      - policy
+      description: Starts a policy.
+      operationId: policy-startByPolicyName
+      parameters:
+      - name: policyName
+        in: path
+        description: Name of Hyper Protect Data Controller policy handle.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPoliciesStartByPolicyName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policy/{policyName}/sign:
+    post:
+      tags:
+      - policy
+      description: Signs a policy.
+      operationId: policy-signByPolicyName
+      parameters:
+      - name: policyName
+        in: path
+        description: Name of Hyper Protect Data Controller policy handle.
+        required: true
+        schema:
+          pattern: "^[a-zA-Z_\\-0-9]+$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadPoliciesSignByPolicyName'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policy/disable:
+    post:
+      tags:
+      - policy
+      description: Disables the current Hyper Protect Data Controller policy and prevents
+        further requests.
+      operationId: policy-disable
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /policy/reset:
+    post:
+      tags:
+      - policy
+      description: Resets Hyper Protect Data Controller to its original installed
+        state.
+      operationId: policy-reset
+      responses:
+        "202":
+          description: Accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UuidResponse'
+        "401":
+          description: Unauthorized.
+        "503":
+          description: Service Unavailable.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /register:
+    post:
+      tags:
+      - register
+      description: Register to Hyper Protect Data Controller.
+      operationId: register-register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadRegister'
+        required: true
+      responses:
+        "200":
+          description: Success.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "503":
+          description: Service Unavailable.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+    delete:
+      tags:
+      - register
+      description: Unregister from Hyper Protect Data Controller.
+      operationId: register-unregister
+      responses:
+        "200":
+          description: Success.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /requests:
+    get:
+      tags:
+      - requests
+      description: Displays information about all requests made.
+      operationId: requests-findAll
+      responses:
+        "200":
+          description: Success.
+        "403":
+          description: Forbidden.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /requests/{uuid}:
+    get:
+      tags:
+      - requests
+      description: Displays information about a particular request that has been made.
+      operationId: requests-findByUuid
+      parameters:
+      - name: uuid
+        in: path
+        description: The Hyper Protect Data Controller UUID that was placed on the
+          queue.
+        required: true
+        schema:
+          pattern: "^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$"
+          type: string
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "400":
+          description: Bad request.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not found.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /reset:
+    delete:
+      tags:
+      - reset
+      description: Reset DataPrivPass environment
+      operationId: reset
+      responses:
+        "204":
+          description: No Content.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "500":
+          description: Internal Server Error.
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /status:
+    get:
+      tags:
+      - status
+      description: Displays information about all requests made.
+      operationId: status-findAll
+      responses:
+        "200":
+          description: Success.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+  /status/{uuid}:
+    get:
+      tags:
+      - status
+      description: Displays information about a particular request that has been made.
+      operationId: status-findByUuid
+      parameters:
+      - name: uuid
+        in: path
+        description: The Hyper Protect Data Controller UUID that was placed on the
+          queue.
+        required: true
+        schema:
+          pattern: "^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$"
+          type: string
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+      deprecated: true
+      security:
+      - X-CSRF-IBMHPDC-HEADER: []
+components:
+  schemas:
+    Locale:
+      type: object
+      properties:
+        language:
+          type: string
+        script:
+          type: string
+        country:
+          type: string
+        variant:
+          type: string
+        extensionKeys:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        unicodeLocaleAttributes:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        unicodeLocaleKeys:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        iso3Language:
+          type: string
+        iso3Country:
+          type: string
+        displayLanguage:
+          type: string
+        displayScript:
+          type: string
+        displayCountry:
+          type: string
+        displayVariant:
+          type: string
+        displayName:
+          type: string
+    ServletRequest:
+      type: object
+      properties:
+        attributeNames:
+          $ref: '#/components/schemas/EnumerationString'
+        characterEncoding:
+          type: string
+        contentLength:
+          type: integer
+        contentLengthLong:
+          type: integer
+          format: int64
+        contentType:
+          type: string
+        inputStream:
+          $ref: '#/components/schemas/ServletInputStream'
+        parameterNames:
+          $ref: '#/components/schemas/EnumerationString'
+        parameterMap:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          additionalPropertiesSchema:
+            type: array
+            items:
+              type: string
+        protocol:
+          type: string
+        scheme:
+          type: string
+        serverName:
+          type: string
+        serverPort:
+          type: integer
+        reader:
+          $ref: '#/components/schemas/BufferedReader'
+        remoteAddr:
+          type: string
+        remoteHost:
+          type: string
+        locale:
+          $ref: '#/components/schemas/Locale'
+        locales:
+          $ref: '#/components/schemas/EnumerationLocale'
+        secure:
+          type: boolean
+        remotePort:
+          type: integer
+        localName:
+          type: string
+        localAddr:
+          type: string
+        localPort:
+          type: integer
+        servletContext:
+          $ref: '#/components/schemas/ServletContext'
+        asyncStarted:
+          type: boolean
+        asyncSupported:
+          type: boolean
+        asyncContext:
+          $ref: '#/components/schemas/AsyncContext'
+        dispatcherType:
+          type: string
+          enum:
+          - FORWARD
+          - INCLUDE
+          - REQUEST
+          - ASYNC
+          - ERROR
+    ServletOutputStream:
+      type: object
+      properties:
+        ready:
+          type: boolean
+    AsyncContext:
+      type: object
+      properties:
+        request:
+          $ref: '#/components/schemas/ServletRequest'
+        response:
+          $ref: '#/components/schemas/ServletResponse'
+        timeout:
+          type: integer
+          format: int64
+    HttpServletMapping:
+      type: object
+      properties:
+        matchValue:
+          type: string
+        pattern:
+          type: string
+        servletName:
+          type: string
+        mappingMatch:
+          type: string
+          enum:
+          - CONTEXT_ROOT
+          - DEFAULT
+          - EXACT
+          - EXTENSION
+          - PATH
+    JspPropertyGroupDescriptor:
+      type: object
+      properties:
+        urlPatterns:
+          type: array
+          items:
+            type: string
+        elIgnored:
+          type: string
+        pageEncoding:
+          type: string
+        scriptingInvalid:
+          type: string
+        isXml:
+          type: string
+        includePreludes:
+          type: array
+          items:
+            type: string
+        includeCodas:
+          type: array
+          items:
+            type: string
+        deferredSyntaxAllowedAsLiteral:
+          type: string
+        trimDirectiveWhitespaces:
+          type: string
+        defaultContentType:
+          type: string
+        buffer:
+          type: string
+        errorOnUndeclaredNamespace:
+          type: string
+    HttpServletRequest:
+      type: object
+      properties:
+        authType:
+          type: string
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cookie'
+        headerNames:
+          $ref: '#/components/schemas/EnumerationString'
+        httpServletMapping:
+          $ref: '#/components/schemas/HttpServletMapping'
+        method:
+          type: string
+        pathInfo:
+          type: string
+        pathTranslated:
+          type: string
+        contextPath:
+          type: string
+        queryString:
+          type: string
+        remoteUser:
+          type: string
+        userPrincipal:
+          $ref: '#/components/schemas/Principal'
+        requestedSessionId:
+          type: string
+        requestURI:
+          type: string
+        requestURL:
+          $ref: '#/components/schemas/StringBuffer'
+        servletPath:
+          type: string
+        session:
+          $ref: '#/components/schemas/HttpSession'
+        requestedSessionIdValid:
+          type: boolean
+        requestedSessionIdFromCookie:
+          type: boolean
+        requestedSessionIdFromURL:
+          type: boolean
+        requestedSessionIdFromUrl:
+          type: boolean
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Part'
+        trailerFields:
+          type: object
+          additionalProperties:
+            type: string
+          additionalPropertiesSchema:
+            type: string
+        trailerFieldsReady:
+          type: boolean
+        attributeNames:
+          $ref: '#/components/schemas/EnumerationString'
+        characterEncoding:
+          type: string
+        contentLength:
+          type: integer
+        contentLengthLong:
+          type: integer
+          format: int64
+        contentType:
+          type: string
+        inputStream:
+          $ref: '#/components/schemas/ServletInputStream'
+        parameterNames:
+          $ref: '#/components/schemas/EnumerationString'
+        parameterMap:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          additionalPropertiesSchema:
+            type: array
+            items:
+              type: string
+        protocol:
+          type: string
+        scheme:
+          type: string
+        serverName:
+          type: string
+        serverPort:
+          type: integer
+        reader:
+          $ref: '#/components/schemas/BufferedReader'
+        remoteAddr:
+          type: string
+        remoteHost:
+          type: string
+        locale:
+          $ref: '#/components/schemas/Locale'
+        locales:
+          $ref: '#/components/schemas/EnumerationLocale'
+        secure:
+          type: boolean
+        remotePort:
+          type: integer
+        localName:
+          type: string
+        localAddr:
+          type: string
+        localPort:
+          type: integer
+        servletContext:
+          $ref: '#/components/schemas/ServletContext'
+        asyncStarted:
+          type: boolean
+        asyncSupported:
+          type: boolean
+        asyncContext:
+          $ref: '#/components/schemas/AsyncContext'
+        dispatcherType:
+          type: string
+          enum:
+          - FORWARD
+          - INCLUDE
+          - REQUEST
+          - ASYNC
+          - ERROR
+    UuidResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+    ServletRegistration:
+      type: object
+      properties:
+        mappings:
+          type: array
+          items:
+            type: string
+        runAsRole:
+          type: string
+        name:
+          type: string
+        className:
+          type: string
+        initParameters:
+          type: object
+          additionalProperties:
+            type: string
+          additionalPropertiesSchema:
+            type: string
+    ServletInputStream:
+      type: object
+      properties:
+        finished:
+          type: boolean
+        ready:
+          type: boolean
+    PayloadPoliciesStartByPolicyName:
+      required:
+      - token
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token that the policy was signed with.
+    PayloadPoliciesSignByPolicyName:
+      required:
+      - token
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token to sign policy with.
+    PayloadRegister:
+      required:
+      - password
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+          description: Username that will be used to issue requests. This username
+            should match the username that was used to authenticate.
+        password:
+          type: string
+          description: Password that will be used to issue requests. This password
+            should match the password that was used to authenticate.
+    ClassLoader:
+      type: object
+      properties:
+        parent:
+          $ref: '#/components/schemas/ClassLoader'
+    ServletContext:
+      type: object
+      properties:
+        contextPath:
+          type: string
+        majorVersion:
+          type: integer
+        minorVersion:
+          type: integer
+        effectiveMajorVersion:
+          type: integer
+        effectiveMinorVersion:
+          type: integer
+        servlets:
+          $ref: '#/components/schemas/EnumerationServlet'
+        servletNames:
+          $ref: '#/components/schemas/EnumerationString'
+        serverInfo:
+          type: string
+        initParameterNames:
+          $ref: '#/components/schemas/EnumerationString'
+        attributeNames:
+          $ref: '#/components/schemas/EnumerationString'
+        servletContextName:
+          type: string
+        servletRegistrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ServletRegistration'
+          additionalPropertiesSchema:
+            $ref: '#/components/schemas/ServletRegistration'
+        filterRegistrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/FilterRegistration'
+          additionalPropertiesSchema:
+            $ref: '#/components/schemas/FilterRegistration'
+        sessionCookieConfig:
+          $ref: '#/components/schemas/SessionCookieConfig'
+        defaultSessionTrackingModes:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - COOKIE
+            - URL
+            - SSL
+        effectiveSessionTrackingModes:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - COOKIE
+            - URL
+            - SSL
+        jspConfigDescriptor:
+          $ref: '#/components/schemas/JspConfigDescriptor'
+        classLoader:
+          $ref: '#/components/schemas/ClassLoader'
+        virtualServerName:
+          type: string
+        sessionTimeout:
+          type: integer
+        requestCharacterEncoding:
+          type: string
+        responseCharacterEncoding:
+          type: string
+    JspConfigDescriptor:
+      type: object
+      properties:
+        taglibs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaglibDescriptor'
+        jspPropertyGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/JspPropertyGroupDescriptor'
+    SessionCookieConfig:
+      type: object
+      properties:
+        name:
+          type: string
+        domain:
+          type: string
+        path:
+          type: string
+        comment:
+          type: string
+        httpOnly:
+          type: boolean
+        secure:
+          type: boolean
+        maxAge:
+          type: integer
+    EnumerationString:
+      type: object
+    FilterRegistration:
+      type: object
+      properties:
+        servletNameMappings:
+          type: array
+          items:
+            type: string
+        urlPatternMappings:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+        className:
+          type: string
+        initParameters:
+          type: object
+          additionalProperties:
+            type: string
+          additionalPropertiesSchema:
+            type: string
+    PrintWriter:
+      type: object
+    Cookie:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        comment:
+          type: string
+        domain:
+          type: string
+        maxAge:
+          type: integer
+        path:
+          type: string
+        secure:
+          type: boolean
+        version:
+          type: integer
+        httpOnly:
+          type: boolean
+    Status:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        owner:
+          type: string
+        request-type:
+          type: string
+          enum:
+          - VERIFY_LOGIN
+          - LIST_VIEWS
+          - CREATE_VIEW
+          - DELETE_VIEW
+          - SAVE_VIEW_DEFAULT
+          - SAVE_VIEW_TARGET_REPLACE
+          - SAVE_VIEW_TARGET_EXPORT
+          - RESET_POLICY
+          - DISABLE_POLICY
+          - SIGN_POLICY
+          - START_POLICY
+          - GET_ALL_KEYS
+          - GET_KEY
+          - CREATE_KEY
+          - DELETE_KEY
+          - GET_ALL_PASSWORDS
+          - GET_PASSWORD
+          - CREATE_PASSWORD
+          - DELETE_PASSWORD
+          - GET_VIEW
+          - GET_POLICY
+          - VERSION_INFO
+          - SESSION_INFO
+          - PROTECT
+          - GET_ALL_BACKUPS
+          - CREATE_BACKUP
+          - RESTORE_BACKUP
+          - DELETE_BACKUP
+          - DECRYPT_SALT
+          - ENCRYPT_SALT
+          - REWRAP_KEYS
+          - START_EP11TKED
+          - STOP_EP11TKED
+          - STATUS_EP11TKED
+          - APPLY_POLICY
+          - APPLY_POLICY_ON_TABLE
+        status-type:
+          type: string
+          description: |-
+            Status Types:
+            - ACTIVE - A request is currently in progress.
+            - FAILED - A request failed.
+            - QUEUED - A request has been been put on the work queue.
+            - RECEIVED - A request has been received by the Status Daemon and is waiting to be placed in the work queue.
+            - RESPONDED - A user has received a complete request (they will not be able to query again).
+            - SUCCESS - A request has sucessfully completed.
+          enum:
+          - ACTIVE
+          - FAILED
+          - QUEUED
+          - RECEIVED
+          - RESPONDED
+          - SUCCESS
+        timestamp-active:
+          type: string
+          format: date-time
+        timestamp-complete:
+          type: string
+          format: date-time
+        timestamp-queued:
+          type: string
+          format: date-time
+        timestamp-received:
+          type: string
+          format: date-time
+        timestamp-responded:
+          type: string
+          format: date-time
+        response-payload:
+          type: string
+    ServletResponse:
+      type: object
+      properties:
+        characterEncoding:
+          type: string
+        contentType:
+          type: string
+        outputStream:
+          $ref: '#/components/schemas/ServletOutputStream'
+        writer:
+          $ref: '#/components/schemas/PrintWriter'
+        bufferSize:
+          type: integer
+        committed:
+          type: boolean
+        locale:
+          $ref: '#/components/schemas/Locale'
+    Enumeration:
+      type: object
+    EnumerationLocale:
+      type: object
+    HttpSession:
+      type: object
+      properties:
+        creationTime:
+          type: integer
+          format: int64
+        id:
+          type: string
+        lastAccessedTime:
+          type: integer
+          format: int64
+        servletContext:
+          $ref: '#/components/schemas/ServletContext'
+        maxInactiveInterval:
+          type: integer
+        sessionContext:
+          $ref: '#/components/schemas/HttpSessionContext'
+        attributeNames:
+          $ref: '#/components/schemas/EnumerationString'
+        valueNames:
+          type: array
+          items:
+            type: string
+        new:
+          type: boolean
+    InputStream:
+      type: object
+    EnumerationServlet:
+      type: object
+    JsonValue:
+      type: object
+      properties:
+        valueType:
+          type: string
+          enum:
+          - ARRAY
+          - OBJECT
+          - STRING
+          - NUMBER
+          - "TRUE"
+          - "FALSE"
+          - "NULL"
+    PayloadKeysCreateByKeySetNameAndKeyName:
+      type: object
+      properties:
+        algorithm:
+          type: string
+          description: Algorithm that will be used to encrypt the key.
+          nullable: true
+          default: AES256
+    PayloadPoliciesApplyPolicyByConnectionNameAndTableName:
+      required:
+      - targetPassword
+      - targetUrl
+      - targetUser
+      type: object
+      properties:
+        targetUrl:
+          type: string
+        targetUser:
+          type: string
+        targetPassword:
+          type: string
+        targetTable:
+          type: string
+        driver:
+          type: string
+        targetPath:
+          type: string
+        fileHeader:
+          type: string
+        delimiter:
+          type: string
+        targetPersona:
+          type: string
+    StringBuffer:
+      type: object
+    PayloadBackupRestore:
+      required:
+      - password
+      type: object
+      properties:
+        password:
+          type: string
+          description: Password used to generate a key when using the 'password' encryption
+            type.
+        restoreFileSystem:
+          type: boolean
+          description: Will restore the backed up file system.
+          nullable: true
+        restoreJdbcJars:
+          type: boolean
+          description: Will restore the backed up JDBC jar files.
+          nullable: true
+        restoreHWCryptoDir:
+          type: boolean
+          description: Will restore the backed up HW crypto files.
+          nullable: true
+    PayloadPoliciesApply:
+      required:
+      - data
+      type: object
+      properties:
+        targetPersona:
+          type: string
+          description: "Optional target persona, if set will activate protection mode."
+          nullable: true
+        data:
+          type: object
+          description: Data to be enforced or protected depending on targetPersona
+            value.
+          additionalProperties:
+            $ref: '#/components/schemas/JsonValue'
+          additionalPropertiesSchema:
+            $ref: '#/components/schemas/JsonValue'
+    HttpSessionContext:
+      type: object
+      properties:
+        ids:
+          $ref: '#/components/schemas/EnumerationString'
+    Part:
+      type: object
+      properties:
+        inputStream:
+          $ref: '#/components/schemas/InputStream'
+        contentType:
+          type: string
+        name:
+          type: string
+        submittedFileName:
+          type: string
+        size:
+          type: integer
+          format: int64
+        headerNames:
+          type: array
+          items:
+            type: string
+    BufferedReader:
+      type: object
+    TaglibDescriptor:
+      type: object
+      properties:
+        taglibURI:
+          type: string
+        taglibLocation:
+          type: string
+    PayloadBackupCreate:
+      required:
+      - password
+      type: object
+      properties:
+        password:
+          type: string
+          description: Password used to generate a key when using the 'password' encryption
+            type.
+    Principal:
+      type: object
+      properties:
+        name:
+          type: string
+    PayloadPasswordsCreateByPasswordName:
+      required:
+      - password
+      type: object
+      properties:
+        password:
+          minLength: 1
+          type: string
+          description: Password to be set.
+        algorithm:
+          type: string
+          description: Algorithm that will be used to encrypt the password.
+          nullable: true
+          default: AES256
+  securitySchemes:
+    X-CSRF-IBMHPDC-HEADER:
+      type: apiKey
+      description: This is the CSRF header.
+      name: X-CSRF-IBMHPDC-HEADER
+      in: header
